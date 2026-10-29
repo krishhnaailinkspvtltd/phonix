@@ -1,0 +1,146 @@
+/* Motion reliability layer. Import LAST, after mobile-experience.css.
+   These overrides are small and do not replace the approved layout. */
+
+/* Precomputed values eliminate fragile nested multiplication in CSS calc().
+   Every browser now gets card perspective/hover motion; the JS only supplies
+   explicit percentages, pixels and angles. */
+.ph-collection--cinematic .ph-product-stage {
+  --mouse-shift-x: 0px;
+  --mouse-shift-y: 0px;
+  --mouse-tilt: 0deg;
+  --scroll-lift: 0px;
+  --scroll-tilt: 0deg;
+}
+.ph-collection--cinematic .ph-perspective-card {
+  transform:
+    translate(-50%, -50%)
+    translateX(var(--card-shift))
+    translateX(var(--mouse-shift-x))
+    translateY(calc(var(--scroll-lift) + var(--mouse-shift-y)))
+    rotateY(calc(var(--card-angle) + var(--mouse-tilt)))
+    rotateZ(calc(var(--card-roll) + var(--scroll-tilt)))
+    scale(var(--card-scale));
+  transition:
+    transform .85s cubic-bezier(.16,1,.3,1),
+    opacity .6s ease,
+    filter .6s ease;
+  backface-visibility: hidden;
+}
+.ph-collection--cinematic .ph-perspective-card.is-active {
+  filter: saturate(1.07);
+}
+.ph-collection--cinematic .ph-perspective-card:focus-visible {
+  outline: 3px solid #6cb4ff;
+  outline-offset: 6px;
+}
+
+/* Photographic hover effects stay opt-in for precise pointer devices. */
+@media (hover: hover) and (pointer: fine) {
+  .ph-home .ph-film:focus-visible {
+    outline: 3px solid #8dc5ff;
+    outline-offset: 4px;
+  }
+  .ph-home .ph-film img {
+    transform-origin: center;
+  }
+  .ph-home .ph-film:hover img,
+  .ph-home .ph-film:focus-visible img {
+    transform: scale(1.075);
+  }
+  .ph-home .ph-perspective-card:hover .ph-card-title,
+  .ph-home .ph-perspective-card:focus-visible .ph-card-title {
+    transform: translateY(-5px);
+  }
+  .ph-home .ph-card-title {
+    transition: transform .6s cubic-bezier(.16,1,.3,1);
+  }
+  #main-content > div:not(.ph-home) .group:hover,
+  #main-content > div:not(.ph-home) .group:focus-visible {
+    box-shadow: 0 18px 45px -30px rgba(6,34,78,.24);
+  }
+}
+
+/* Kinetic imagery is clipped by its original editorial crop. */
+.ph-home .ph-philosophy-photo,
+.ph-home .ph-film,
+.ph-home .ph-product-image {
+  isolation: isolate;
+}
+.ph-home .ph-close-photo {
+  transform-origin: 50% 50%;
+}
+
+@media (max-width: 768px) {
+  .ph-collection--cinematic .ph-perspective-card {
+    transform:
+      translate(-50%, -50%)
+      translateX(var(--card-shift-mobile))
+      translateY(var(--scroll-lift))
+      rotateY(var(--card-angle-mobile))
+      scale(var(--card-scale-mobile));
+    will-change: auto;
+  }
+  .ph-home .ph-story-stage {
+    height: auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+  }
+  .ph-home .ph-story-scene {
+    height: auto;
+    min-height: max(730px, 100svh);
+    overflow: hidden;
+  }
+  .ph-home .ph-story-copy {
+    transform: none;
+  }
+}
+
+/* Reduced motion retains ALL four storytelling chapters on desktop.
+   Previously the chapters were absolutely stacked: only the last remained. */
+@media (prefers-reduced-motion: reduce) {
+  .ph-home .ph-story-stage {
+    height: auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+  }
+  .ph-home .ph-story-scene {
+    position: relative;
+    inset: auto !important;
+    min-height: max(620px, 85svh);
+    clip-path: none !important;
+  }
+  .ph-home .ph-story-scene:not(:first-child) {
+    clip-path: none !important;
+  }
+  .ph-home .ph-product-stage {
+    --scroll-lift: 0px;
+    --scroll-tilt: 0deg;
+  }
+  .ph-collection--cinematic .ph-perspective-card {
+    transform:
+      translate(-50%, -50%)
+      translateX(var(--card-shift))
+      rotateY(var(--card-angle))
+      scale(var(--card-scale));
+    transition: none !important;
+  }
+  .ph-home .ph-reveal,
+  .ph-home .ph-story-copy,
+  #main-content > div:not(.ph-home) * {
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media (max-width: 768px) and (prefers-reduced-motion: reduce) {
+  .ph-collection--cinematic .ph-perspective-card {
+    transform:
+      translate(-50%, -50%)
+      translateX(var(--card-shift-mobile))
+      rotateY(var(--card-angle-mobile))
+      scale(var(--card-scale-mobile));
+  }
+}
