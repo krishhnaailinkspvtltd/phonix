@@ -1,0 +1,142 @@
+/* PHONIX mobile-only experience.
+   Desktop selectors and layouts are intentionally untouched.
+   Native vertical scrolling, swipe navigation and reduced motion remain first-class. */
+@media (max-width: 768px) {
+  :root { -webkit-text-size-adjust: 100%; }
+  html { scroll-padding-top: 78px; }
+  html, body, #root, .pg-app { width: 100%; max-width: 100%; overflow-x: clip; }
+  .ph-home { max-width: 100%; overflow-x: clip; }
+  .pg-nav { padding-inline: clamp(16px, 5vw, 24px); min-height: 72px; gap: 12px; }
+  .pg-header--scrolled .pg-nav { min-height: 66px; }
+  .pg-wordmark-main { font-size: clamp(25px, 7vw, 32px); }
+  .pg-wordmark-sub { font-size: 9px; letter-spacing: .20em; }
+  .pg-menu-trigger { width: 48px; height: 48px; flex-shrink: 0; border-radius: 16px; border: 1px solid currentColor; background: rgba(255,255,255,.13); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+  .pg-header--solid .pg-menu-trigger { border-color: rgba(14,64,124,.18); background: rgba(226,239,253,.6); }
+  .pg-menu-trigger:focus-visible, .pg-fullmenu button:focus-visible, .pg-fullmenu a:focus-visible { outline: 3px solid #9bd1ff; outline-offset: 3px; }
+  .pg-fullmenu { height: 100dvh; height: 100svh; padding: max(20px, env(safe-area-inset-top)) clamp(19px, 5vw, 28px) max(18px, env(safe-area-inset-bottom)); overscroll-behavior: contain; background: linear-gradient(155deg,#06438d,#072953 80%); }
+  .pg-fullmenu-top { gap: 10px; font-size: clamp(20px, 6vw, 26px); padding-bottom: 17px; }
+  .pg-fullmenu-top small { font-size: 8px; margin-left: 5px; letter-spacing: .11em; }
+  .pg-fullmenu-top button { width: 48px; height: 48px; border-radius: 15px; flex: none; }
+  .pg-fullmenu-grid { display: block; flex: 1; padding: 23px 0; }
+  .pg-fullmenu-links a { min-height: clamp(62px, 10.5svh, 86px); align-items: center; gap: 16px; padding: 8px 2px; }
+  .pg-fullmenu-links a span { font-size: clamp(26px, 7.5vw, 48px); }
+  .pg-fullmenu-links a small { font-size: 11px; flex: none; }
+  .pg-fullmenu-links a svg { width: 21px; height: 21px; flex: none; }
+  .pg-fullmenu-bottom { font-size: 11px; padding-top: 16px; line-height: 1.5; }
+
+  /* Cinematic hero: preserve imagery, serif accent and real glass CTA. */
+  .ph-hero { min-height: max(620px, 100svh); height: auto; }
+  .ph-hero-photo { background-position: 60% center; }
+  .ph-hero-content { left: clamp(18px,5vw,24px); right: clamp(18px,5vw,24px); bottom: 126px; }
+  .ph-hero-kicker { font-size: 10px; letter-spacing: .14em; margin-bottom: 19px; }
+  .ph-hero h1 { font-size: clamp(43px, 10.8vw, 79px); line-height: 1.03; margin-bottom: 18px; letter-spacing: -.075em; }
+  .ph-word-mask { padding-right: .13em; }
+  .ph-hero-detail p { font-size: clamp(14px,3.8vw,17px); line-height: 1.62; margin-bottom: 19px; max-width: 34ch; }
+  .ph-home .ph-hero-detail a.ph-button.ph-button--white,
+  .ph-home .ph-close a.ph-button.ph-button--white { min-height: 52px; border-radius: 18px; font-size: 14px; padding: 14px 19px; }
+  .ph-hero-edge { padding: 16px clamp(18px,5vw,24px); }
+  .ph-hero-edge a { min-height: 40px; }
+  .ph-pad { padding: clamp(70px, 14vw, 98px) clamp(18px, 5vw, 26px); }
+  .ph-editorial-heading { margin-bottom: 35px; }
+  .ph-editorial-heading-grid { gap: 17px; margin-top: 17px; }
+  .ph-editorial-heading h2 { font-size: clamp(41px,10vw,72px); line-height: 1.04; overflow-wrap: anywhere; }
+  .ph-editorial-heading p { font-size: 16px; line-height: 1.65; }
+  .ph-kicker { font-size: 11px; letter-spacing: .11em; }
+  .ph-film-instruction { margin-bottom: 15px; font-size: 10px; }
+  .ph-film-row { gap: 14px; }
+  .ph-film { height: clamp(290px, 88vw, 420px); border-radius: 22px; isolation: isolate; box-shadow: 0 16px 35px -23px rgba(5,29,63,.45); }
+  .ph-film img { transition: transform .85s cubic-bezier(.2,.75,.2,1); }
+  .ph-film.is-active img { transform: scale(1.065); }
+  .ph-film-body { left: 22px; right: 20px; bottom: 23px; }
+  .ph-film-body strong, .ph-film:not(.is-active) .ph-film-body strong { font-size: clamp(28px, 7.2vw, 38px); }
+  .ph-film-body > span { max-height: none; opacity: 1; font-size: 14px; line-height: 1.6; }
+  .ph-film-arrow { width: 46px; height: 46px; }
+
+  /* Product slider: prominent focused card, side peeks, live swipe feedback. */
+  .ph-collection--cinematic { padding: 76px 0 56px !important; }
+  .ph-collection-intro { padding-inline: clamp(18px,5vw,26px); }
+  .ph-collection-intro h2 { font-size: clamp(38px,10vw,60px); line-height: 1.08; margin: 17px 0 12px; }
+  .ph-collection-intro p { max-width: 34ch; font-size: 14px; line-height: 1.6; }
+  .ph-collection-explore { min-height: 44px; font-size: 10px; }
+  .ph-collection--cinematic .ph-product-stage { height: 390px; margin-top: 13px; --drag-px: 0px; overscroll-behavior-x: contain; touch-action: pan-y; }
+  .ph-collection--cinematic .ph-perspective-card {
+    width: clamp(196px, 59vw, 260px);
+    height: clamp(286px, 83vw, 355px);
+    transform: translate(-50%, -50%) translateX(calc(var(--offset) * 73% + var(--drag-px))) translateY(var(--scroll-lift)) rotateY(calc(var(--offset) * -15deg)) rotateZ(var(--scroll-tilt)) scale(calc(1 - var(--distance) * .065));
+    transition: transform .62s cubic-bezier(.19,1,.22,1), opacity .35s ease;
+  }
+  .ph-collection--cinematic .ph-perspective-card.is-active { filter: brightness(1.03); }
+  .ph-collection--cinematic .ph-card-title { font-size: clamp(17px,5vw,22px); line-height: 1.19; }
+  .ph-collection--cinematic .ph-collection-controls { padding-inline: clamp(18px,5vw,26px); margin-top: 9px; }
+  .ph-current-category { min-width: 0; gap: 9px; }
+  .ph-current-category small { flex: none; font-size: 10px; }
+  .ph-current-category strong { font-size: 15px; overflow-wrap: anywhere; }
+  .ph-collection-arrows { flex: none; }
+  .ph-collection-arrows button { width: 48px; height: 48px; }
+
+  /* On touch, the film chapters retain imagery and scroll-based motion rather than pinning. */
+  .ph-story-scene { height: max(610px, 88svh); min-height: 610px; }
+  .ph-story-image { background-position: center; }
+  .ph-story-shade { background: linear-gradient(90deg,rgba(2,19,41,.85),rgba(1,24,48,.25) 95%),linear-gradient(0deg,rgba(3,19,43,.55),transparent 60%); }
+  .ph-story-top,.ph-story-foot { left: clamp(18px,5vw,26px); right: clamp(18px,5vw,26px); font-size: 10px; line-height: 1.6; }
+  .ph-story-top { top: 5svh; }
+  .ph-story-foot { bottom: 5svh; }
+  .ph-story-copy { left: clamp(18px,5vw,26px); right: clamp(18px,5vw,26px); top: 49%; }
+  .ph-story-copy h2 { font-size: clamp(47px, 12vw, 78px); letter-spacing: -.07em; margin: 20px 0 24px; }
+  .ph-story-copy p { font-size: clamp(15px,4vw,18px); line-height: 1.6; max-width: 34ch; }
+  .ph-philosophy { gap: 33px; }
+  .ph-philosophy-photo { height: 72vw; min-height: 260px; border-radius: 17px; }
+  .ph-philosophy-copy h2 { font-size: clamp(46px,11vw,81px); margin: 20px 0; }
+  .ph-philosophy-copy p { font-size: 16px; line-height: 1.75; margin-bottom: 25px; }
+  .ph-close { min-height: 610px; height: auto; padding-block: 105px; }
+  .ph-close-inner h2 { font-size: clamp(62px, 15vw, 110px); margin: 26px 0 30px; }
+  .ph-close-inner p { font-size: 16px; line-height: 1.6; }
+
+  /* Consistent inner-page spacing, readable headings, thumb-friendly controls. */
+  .pg-app main > div:not(.ph-home) h1 { font-size: clamp(37px, 9.7vw, 68px); line-height: 1.05; overflow-wrap: break-word; }
+  .pg-app main > div:not(.ph-home) h2 { overflow-wrap: break-word; }
+  .pg-app main > div:not(.ph-home) button:not(.pg-menu-trigger) { min-height: 44px; }
+  .pg-app main > div:not(.ph-home) input,
+  .pg-app main > div:not(.ph-home) select,
+  .pg-app main > div:not(.ph-home) textarea { font-size: 16px; max-width: 100%; border-radius: 10px; }
+  .pg-app main > div:not(.ph-home) form { min-width: 0; }
+  .pg-app main > div:not(.ph-home) [class~="bg-surface"] { min-width: 0; }
+  .pg-app main > div:not(.ph-home) [class*="grid-cols-"] { min-width: 0; }
+  .pg-app main > div:not(.ph-home) img { max-width: 100%; }
+  .pg-mobile-filter-row { display: flex; flex-wrap: nowrap; gap: 9px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; scroll-snap-type: x proximity; padding: 2px 0 10px; margin-bottom: 28px; -webkit-overflow-scrolling: touch; }
+  .pg-mobile-filter-row::-webkit-scrollbar { display: none; }
+  .pg-mobile-filter-row button { flex: none; white-space: nowrap; scroll-snap-align: start; border-radius: 999px; padding: 11px 15px; font-size: 13px; }
+  .pg-app main > div:not(.ph-home) .group img { transition: transform .55s ease; }
+  .pg-app main > div:not(.ph-home) .group:active img { transform: scale(1.035); }
+  .pg-app main > div:not(.ph-home) .aspect-\\[4\\/3\\] { border-radius: 16px; overflow: hidden; }
+  .pg-app main > div:not(.ph-home) .aspect-\\[5\\/4\\] { border-radius: 16px; overflow: hidden; }
+  .pg-demo-notice { margin-top: 72px; padding: 10px 16px; font-size: 11px; line-height: 1.5; }
+  .pg-app main:has(.pg-demo-notice)>div:not(.ph-home) { padding-top: 33px; }
+  .pg-footer { padding: 77px clamp(18px,5vw,26px) calc(25px + env(safe-area-inset-bottom)); }
+  .pg-footer-main { padding-bottom: 50px; gap: 37px; }
+  .pg-footer-main h2 { font-size: clamp(53px, 13vw, 83px); margin: 20px 0 28px; }
+  .pg-footer-directory { gap: 12px 18px; }
+  .pg-footer-directory a { font-size: 15px; padding-block: 7px; }
+  .pg-footer-action { min-height: 48px; }
+  .pg-footer-end { align-items: flex-start; gap: 13px; font-size: 11px; }
+  .pg-footer-end button { padding-block: 9px; min-height: 42px; }
+  .pg-gallery-lightbox { padding: max(16px,env(safe-area-inset-top)) 9px max(16px,env(safe-area-inset-bottom)); }
+  .pg-gallery-lightbox img { max-height: 70dvh; min-width: 0; }
+  .pg-gallery-lightbox button { min-width: 44px; min-height: 44px; flex: none; }
+}
+@media (max-width: 390px) {
+  .ph-hero h1 { font-size: clamp(39px, 11.1vw, 50px); }
+  .ph-hero-content { bottom: 112px; }
+  .ph-collection--cinematic .ph-product-stage { height: 342px; }
+  .ph-collection--cinematic .ph-perspective-card { width: 185px; height: 275px; }
+  .ph-collection--cinematic .ph-collection-controls { gap: 9px; }
+  .ph-current-category strong { font-size: 13px; }
+  .ph-collection-arrows { gap: 6px; }
+  .ph-collection-arrows button { width: 44px; height: 44px; }
+  .ph-story-copy h2 { font-size: clamp(42px, 12vw, 58px); }
+  .pg-fullmenu-links a { min-height: 60px; }
+}
+@media (max-width: 768px) and (prefers-reduced-motion: reduce) {
+  .ph-film img, .ph-collection--cinematic .ph-perspective-card, .pg-app main > div:not(.ph-home) .group img { transition: none !important; }
+  .ph-collection--cinematic .ph-perspective-card { transform: translate(-50%, -50%) translateX(calc(var(--offset) * 73%)) rotateY(calc(var(--offset) * -15deg)) scale(calc(1 - var(--distance) * .065)); }
+}
