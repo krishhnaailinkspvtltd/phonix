@@ -105,3 +105,38 @@
   .ph-home .ph-hero-detail .ph-button,.ph-home .ph-close .ph-button,.pg-header .pg-nav-contact{transition:none}
   .ph-home .ph-hero-detail .ph-button:hover,.ph-home .ph-close .ph-button:hover,.pg-header .pg-nav-contact:hover{transform:none}
 }
+
+
+/* Transparent blue glass, overrides earlier opaque white CTA rules. */
+.ph-home .ph-hero-detail a.ph-button.ph-button--white,
+.ph-home .ph-close a.ph-button.ph-button--white,
+.pg-header a.pg-nav-contact,
+.pg-header--solid a.pg-nav-contact{
+  background-color:rgba(64,128,205,.17);
+  background-image:linear-gradient(135deg,rgba(190,220,255,.10),rgba(45,100,165,.10));
+  color:#fff;
+  border:1px solid rgba(232,244,255,.38);
+  border-radius:20px;
+  -webkit-backdrop-filter:blur(18px) saturate(155%);
+  backdrop-filter:blur(18px) saturate(155%);
+  box-shadow:0 10px 30px rgba(5,25,55,.2),inset 0 1px 0 rgba(255,255,255,.24);
+}
+.ph-home .ph-hero-detail a.ph-button.ph-button--white:hover,
+.ph-home .ph-close a.ph-button.ph-button--white:hover,
+.pg-header a.pg-nav-contact:hover,
+.pg-header--solid a.pg-nav-contact:hover{
+  background-color:rgba(65,135,215,.27);
+  color:#fff;
+  border-color:rgba(255,255,255,.62);
+  box-shadow:0 15px 34px rgba(5,25,55,.29),inset 0 1px 0 rgba(255,255,255,.35);
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .ph-home .ph-hero-detail a.ph-button.ph-button--white,
+  .ph-home .ph-close a.ph-button.ph-button--white,
+  .pg-header a.pg-nav-contact{background-color:rgba(10,46,92,.72)}
+}
+@media(prefers-reduced-motion:reduce){
+  .ph-home .ph-hero-detail a.ph-button.ph-button--white:hover,
+  .ph-home .ph-close a.ph-button.ph-button--white:hover,
+  .pg-header a.pg-nav-contact:hover{transform:none}
+}
