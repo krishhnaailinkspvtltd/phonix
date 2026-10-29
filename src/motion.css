@@ -17,3 +17,28 @@
 @media(hover:hover) and (pointer:fine) and (min-width:769px){.ph-home .ph-hero-shade{inset:-20px;transform:translate3d(var(--hero-mouse-x,0px),var(--hero-mouse-y,0px),0);transition:transform .22s ease-out}.ph-home .ph-film:focus-visible{outline:3px solid #87c2ff;outline-offset:4px}#main-content > div:not(.ph-home) section a:hover svg{transform:translate(3px,-3px)}#main-content > div:not(.ph-home) section a svg{transition:transform .35s cubic-bezier(.2,.8,.2,1)}}
 @media(max-width:768px){.ph-scroll-progress{height:2px}.ph-home .ph-film::after{display:none}.ph-home .ph-story-scene .ph-story-image{will-change:auto}.ph-home .ph-product-view{transform:none!important}}
 @media(prefers-reduced-motion:reduce){.ph-scroll-progress{display:none}.ph-home .ph-film::after{display:none}.ph-home .ph-story-copy,.ph-home .ph-close-photo,.ph-home .ph-story-scene .ph-story-image{will-change:auto}#main-content > div:not(.ph-home) .group img{transition:none}}
+
+/* Immersive editorial product carousel — Phonix's own content and blue palette. */
+.ph-collection--cinematic{background:#f9f8f4!important;padding:clamp(85px,9vw,150px) 0 55px!important;overflow:hidden;color:#172b49}
+.ph-collection-intro{max-width:1180px;margin:0 auto;padding:0 clamp(24px,5vw,70px)}
+.ph-collection-intro .ph-kicker{color:#41628e;font-size:11px;letter-spacing:.2em}
+.ph-collection-intro-row{display:flex;justify-content:space-between;align-items:center;gap:35px}
+.ph-collection-intro h2{font-size:clamp(35px,4vw,65px);font-weight:440;letter-spacing:-.055em;line-height:1.1;margin:23px 0 18px}
+.ph-collection-intro h2 em{color:#1d59a4;font-family:Georgia,serif;font-weight:400}
+.ph-collection-intro p{font-size:clamp(14px,1.1vw,17px);color:#67758a;margin:0}
+.ph-collection-explore{display:inline-flex;align-items:center;gap:16px;padding:10px 0;border-bottom:1px solid #9baac0;color:#1a3b68;white-space:nowrap;font-size:11px;font-weight:700;letter-spacing:.16em}
+.ph-collection--cinematic .ph-product-stage{position:relative;display:block;overflow:visible;padding:0!important;margin:45px 0 0;height:clamp(340px,35vw,560px);perspective:1600px;cursor:grab;touch-action:pan-y;user-select:none}
+.ph-collection--cinematic .ph-product-stage:active{cursor:grabbing}
+.ph-collection--cinematic .ph-perspective-card{position:absolute!important;top:50%;left:50%;display:block;flex:none;width:clamp(210px,19vw,330px);height:clamp(290px,29vw,490px);padding:0;transform:translate(-50%,-50%) translateX(calc(var(--offset)*110%)) rotateY(calc(var(--offset)*-15deg)) rotateZ(calc(var(--offset)*-1.7deg)) scale(calc(1 - var(--distance)*.055));opacity:var(--visible);visibility:visible;z-index:calc(10 - var(--distance));transition:transform .85s cubic-bezier(.2,.75,.2,1),opacity .6s ease;pointer-events:auto;will-change:transform}
+.ph-collection--cinematic .ph-perspective-card[tabindex="-1"]{pointer-events:none}
+.ph-collection--cinematic .ph-perspective-card .ph-product-image{height:100%!important;border-radius:clamp(23px,2.4vw,44px);overflow:hidden;background:#dce5ef;box-shadow:0 25px 45px -29px rgba(30,40,54,.3)}
+.ph-collection--cinematic .ph-perspective-card .ph-product-image img{height:100%;width:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.75,.2,1)}
+.ph-collection--cinematic .ph-perspective-card:hover img{transform:scale(1.09)}
+.ph-collection--cinematic .ph-card-shade{position:absolute;inset:42% 0 0;background:linear-gradient(transparent,rgba(4,18,36,.64));z-index:1;pointer-events:none}
+.ph-collection--cinematic .ph-card-title{position:absolute;bottom:25px;left:24px;right:15px;z-index:2;color:white;font-size:clamp(20px,1.6vw,28px);line-height:1.15;font-weight:550;letter-spacing:-.035em;text-shadow:0 2px 10px #0003}
+.ph-collection--cinematic .ph-collection-controls{max-width:1180px;padding:0 clamp(24px,5vw,70px);margin:24px auto 0;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.ph-current-category{display:flex;align-items:center;gap:15px}.ph-current-category small{font-size:11px;letter-spacing:.15em;color:#8d9baa}.ph-current-category strong{font-size:18px;font-weight:500;letter-spacing:-.035em}
+.ph-collection-arrows{display:flex;gap:10px}.ph-collection-arrows button{width:42px;height:42px;border:1px solid #c9cfd6;border-radius:50%;display:grid;place-items:center;color:#234e83;background:transparent;transition:background .25s,color .25s,transform .25s}.ph-collection-arrows button:hover{background:#1c57a1;color:white;transform:translateY(-2px)}
+@media(max-width:768px){.ph-collection--cinematic{padding:78px 0 50px!important}.ph-collection-intro-row{align-items:flex-start;flex-direction:column;gap:18px}.ph-collection-intro h2{margin-top:17px}.ph-collection--cinematic .ph-product-stage{height:390px;margin-top:24px}.ph-collection--cinematic .ph-perspective-card{width:210px;height:310px;transform:translate(-50%,-50%) translateX(calc(var(--offset)*72%)) rotateY(calc(var(--offset)*-16deg)) scale(calc(1 - var(--distance)*.07))}.ph-collection--cinematic .ph-card-title{font-size:19px;left:17px;bottom:21px}.ph-current-category strong{font-size:15px}}
+@media(max-width:390px){.ph-collection--cinematic .ph-product-stage{height:330px}.ph-collection--cinematic .ph-perspective-card{width:185px;height:270px}}
+@media(prefers-reduced-motion:reduce){.ph-collection--cinematic .ph-perspective-card,.ph-collection--cinematic .ph-perspective-card img{transition:none!important;will-change:auto}}
