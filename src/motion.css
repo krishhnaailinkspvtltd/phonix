@@ -140,3 +140,12 @@
   .ph-home .ph-close a.ph-button.ph-button--white:hover,
   .pg-header a.pg-nav-contact:hover{transform:none}
 }
+
+
+/* Interactive product range: follow cursor and scrub subtly on scroll. */
+.ph-collection--cinematic .ph-product-stage{--mouse-x:0;--mouse-y:0;--scroll-lift:0px;--scroll-tilt:0deg}
+.ph-collection--cinematic .ph-perspective-card{
+ transform:translate(-50%,-50%) translateX(calc(var(--offset)*110% + var(--mouse-x)*12px)) translateY(calc(var(--scroll-lift) + var(--mouse-y)*-13px)) rotateY(calc(var(--offset)*-15deg + var(--mouse-x)*3deg)) rotateZ(calc(var(--offset)*-1.7deg + var(--scroll-tilt))) scale(calc(1 - var(--distance)*.055));
+}
+@media(max-width:768px){.ph-collection--cinematic .ph-perspective-card{transform:translate(-50%,-50%) translateX(calc(var(--offset)*72%)) translateY(var(--scroll-lift)) rotateY(calc(var(--offset)*-16deg)) scale(calc(1 - var(--distance)*.07))}}
+@media(prefers-reduced-motion:reduce){.ph-collection--cinematic .ph-perspective-card{transform:translate(-50%,-50%) translateX(calc(var(--offset)*110%)) rotateY(calc(var(--offset)*-15deg)) scale(calc(1 - var(--distance)*.055))}}
