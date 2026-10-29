@@ -16,6 +16,7 @@ import { ContactPage } from '@/pages/ContactPage'
 import './creative.css'
 import './carysil-redesign.css'
 import './motion.css'
+import './mobile-experience.css'
 
 function DemoNotice() {
   const { pathname } = useLocation()
@@ -45,7 +46,7 @@ export default function App() {
   }, [hasLoaded])
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse)').matches) return
     const lenis = new Lenis({ duration: 1.05, smoothWheel: true, wheelMultiplier: 0.9 })
     lenis.on('scroll', ScrollTrigger.update)
     let rafId = 0
