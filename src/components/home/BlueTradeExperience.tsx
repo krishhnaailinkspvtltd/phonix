@@ -70,6 +70,12 @@ export function BlueTradeExperience() {
         y: 0, autoAlpha: 1, duration: 1.05, stagger: .13, ease: 'power3.out',
         scrollTrigger: { trigger: '.ph-film-row', start: 'top 88%', once: true },
       })
+      const collectionStage = homeRef.current?.querySelector<HTMLElement>('.ph-product-stage')
+      if (collectionStage) {
+        gsap.fromTo(collectionStage, { '--scroll-lift': '30px', '--scroll-tilt': '-4deg' },
+          { '--scroll-lift': '-20px', '--scroll-tilt': '3deg', ease: 'none',
+            scrollTrigger: { trigger: collectionStage, start: 'top bottom', end: 'bottom top', scrub: 1.2 } })
+      }
       gsap.utils.toArray<HTMLElement>('.ph-picture-reveal').forEach((el) => {
         gsap.fromTo(el, { clipPath: 'inset(10% 0 10% 0)', scale: .96 }, {
           clipPath: 'inset(0% 0 0% 0)', scale: 1, duration: 1.2, ease: 'power2.out',
@@ -133,11 +139,20 @@ export function BlueTradeExperience() {
   const moveGallery = (dir: number) => {
     setActiveProduct(current => (current + dir + PRODUCT_CATEGORIES.length) % PRODUCT_CATEGORIES.length)
   }
+  const collectionPointerMotion = (e: PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const rect = e.currentTarget.getBoundingClientRect()
+    const mx = Math.max(-1, Math.min(1, ((e.clientX - rect.left) / rect.width - .5) * 2))
+    const my = Math.max(-1, Math.min(1, ((e.clientY - rect.top) / rect.height - .5) * 2))
+    e.currentTarget.style.setProperty('--mouse-x', mx.toFixed(3))
+    e.currentTarget.style.setProperty('--mouse-y', my.toFixed(3))
+  }
   const pointerDown = (e: PointerEvent<HTMLDivElement>) => {
     if (e.pointerType === 'mouse' && e.button !== 0) return
     drag.current = { down: true, x: e.clientX, scroll: 0, moved: false }
   }
   const pointerMove = (e: PointerEvent<HTMLDivElement>) => {
+    collectionPointerMotion(e)
     if (!drag.current.down) return
     if (Math.abs(e.clientX - drag.current.x) > 12) drag.current.moved = true
   }
@@ -196,14 +211,16 @@ export function BlueTradeExperience() {
         </div>
       </div>
       <div ref={galleryRef} className="ph-product-track ph-product-stage" role="region" aria-roledescription="carousel" aria-label="Product categories"
-        onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerEnd} onPointerCancel={() => { drag.current.down = false }}
+        onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerEnd}
+        onPointerLeave={e => { if (drag.current.down) pointerEnd(e); e.currentTarget.style.setProperty('--mouse-x', '0'); e.currentTarget.style.setProperty('--mouse-y', '0') }}
+        onPointerCancel={() => { drag.current.down = false }}
         onClickCapture={e => { if (drag.current.moved) { e.preventDefault(); e.stopPropagation() } }}>
         {PRODUCT_CATEGORIES.map((category,index) => {
           const length = PRODUCT_CATEGORIES.length
           const raw = (index - activeProduct + length) % length
           const offset = raw > length / 2 ? raw - length : raw
           const isActive = offset === 0
-          const style = { '--offset': offset, '--distance': Math.abs(offset), '--visible': Math.abs(offset) > 2 ? 0 : 1 } as CSSProperties
+          const style = { '--offset': offset, '--distance': Math.abs(offset), '--visible': Math.abs(offset) > 2 ? 0 : 1, '--depth': offset } as CSSProperties
           return <Link to={`/products?category=${category.id}`} key={category.id}
             className={`ph-product ph-perspective-card${isActive ? ' is-active' : ''}`}
             style={style} draggable={false} tabIndex={Math.abs(offset) > 2 ? -1 : 0}
