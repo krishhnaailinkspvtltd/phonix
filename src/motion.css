@@ -71,3 +71,37 @@
   .ph-home :is(.ph-hero,.ph-close) .ph-button--white{transition:none}
   .ph-home :is(.ph-hero,.ph-close) .ph-button--white:hover{transform:none}
 }
+
+
+/* Port-image CTAs: rounded, translucent, accessible glass. */
+.ph-home .ph-hero-detail .ph-button,
+.ph-home .ph-close .ph-button,
+.pg-header .pg-nav-contact{
+  border-radius:18px;
+  background:rgba(255,255,255,.78);
+  color:#092b58;
+  border:1px solid rgba(255,255,255,.75);
+  box-shadow:0 12px 35px rgba(7,30,61,.17),inset 0 1px 0 rgba(255,255,255,.8);
+  -webkit-backdrop-filter:blur(18px) saturate(150%);
+  backdrop-filter:blur(18px) saturate(150%);
+  transition:background .3s ease,box-shadow .3s ease,transform .3s ease,border-color .3s ease;
+}
+.ph-home .ph-hero-detail .ph-button:hover,
+.ph-home .ph-close .ph-button:hover,
+.pg-header .pg-nav-contact:hover{
+  background:rgba(255,255,255,.9);
+  border-color:#fff;
+  color:#092b58;
+  box-shadow:0 16px 44px rgba(6,27,59,.26),inset 0 1px 0 #fff;
+  transform:translateY(-3px);
+}
+.ph-home .ph-hero-detail .ph-button:focus-visible,
+.ph-home .ph-close .ph-button:focus-visible,
+.pg-header .pg-nav-contact:focus-visible{outline:3px solid #90c6ff;outline-offset:4px}
+@media(max-width:768px){
+  .ph-home .ph-hero-detail .ph-button,.ph-home .ph-close .ph-button{border-radius:16px;min-height:52px}
+}
+@media(prefers-reduced-motion:reduce){
+  .ph-home .ph-hero-detail .ph-button,.ph-home .ph-close .ph-button,.pg-header .pg-nav-contact{transition:none}
+  .ph-home .ph-hero-detail .ph-button:hover,.ph-home .ph-close .ph-button:hover,.pg-header .pg-nav-contact:hover{transform:none}
+}
