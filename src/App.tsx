@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-route
 import Lenis from 'lenis'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { LoadingScreen } from '@/components/common/LoadingScreen'
+import { RouteEffects, ScrollProgress } from '@/components/common/RouteEffects'
 import { Navigation } from '@/components/layout/Navigation'
 import { Footer } from '@/components/layout/Footer'
 import { HomePage } from '@/pages/HomePage'
@@ -14,6 +15,7 @@ import { GalleryPage } from '@/pages/GalleryPage'
 import { ContactPage } from '@/pages/ContactPage'
 import './creative.css'
 import './carysil-redesign.css'
+import './motion.css'
 
 function DemoNotice() {
   const { pathname } = useLocation()
@@ -55,6 +57,8 @@ export default function App() {
   return (
     <BrowserRouter>
         <ScrollOnRouteChange />
+        <RouteEffects />
+        <ScrollProgress />
         {!hasLoaded && <LoadingScreen onComplete={() => setHasLoaded(true)} />}
         <div className="pg-app min-h-screen bg-canvas text-primary-text">
           <Navigation />
