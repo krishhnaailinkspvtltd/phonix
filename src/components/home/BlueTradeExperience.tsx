@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import type { PointerEvent, ReactNode } from 'react'
+import type { PointerEvent, ReactNode, CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 import gsap from 'gsap'
@@ -37,6 +37,7 @@ export function BlueTradeExperience() {
   const storyRef = useRef<HTMLElement>(null)
   const galleryRef = useRef<HTMLDivElement>(null)
   const [activeFilm, setActiveFilm] = useState(0)
+  const [activeProduct, setActiveProduct] = useState(2)
   const drag = useRef({ down: false, x: 0, scroll: 0, moved: false })
 
   useEffect(() => {
@@ -68,10 +69,6 @@ export function BlueTradeExperience() {
       gsap.fromTo('.ph-film', { y: 55, autoAlpha: 0 }, {
         y: 0, autoAlpha: 1, duration: 1.05, stagger: .13, ease: 'power3.out',
         scrollTrigger: { trigger: '.ph-film-row', start: 'top 88%', once: true },
-      })
-      gsap.fromTo('.ph-product', { y: 42, autoAlpha: 0 }, {
-        y: 0, autoAlpha: 1, duration: .9, stagger: .095, ease: 'power3.out',
-        scrollTrigger: { trigger: '.ph-product-track', start: 'top 89%', once: true },
       })
       gsap.utils.toArray<HTMLElement>('.ph-picture-reveal').forEach((el) => {
         gsap.fromTo(el, { clipPath: 'inset(10% 0 10% 0)', scale: .96 }, {
@@ -134,21 +131,24 @@ export function BlueTradeExperience() {
   }, [])
 
   const moveGallery = (dir: number) => {
-    if (!galleryRef.current) return
-    const first = galleryRef.current.querySelector<HTMLElement>('.ph-product')
-    galleryRef.current.scrollBy({ left: dir * ((first?.offsetWidth || 360) + 18), behavior: 'smooth' })
+    setActiveProduct(current => (current + dir + PRODUCT_CATEGORIES.length) % PRODUCT_CATEGORIES.length)
   }
   const pointerDown = (e: PointerEvent<HTMLDivElement>) => {
-    if (e.pointerType !== 'mouse' || !galleryRef.current) return
-    drag.current = { down: true, x: e.clientX, scroll: galleryRef.current.scrollLeft, moved: false }
+    if (e.pointerType === 'mouse' && e.button !== 0) return
+    drag.current = { down: true, x: e.clientX, scroll: 0, moved: false }
   }
   const pointerMove = (e: PointerEvent<HTMLDivElement>) => {
-    if (!drag.current.down || !galleryRef.current) return
-    const diff = e.clientX - drag.current.x
-    if (Math.abs(diff) > 6) drag.current.moved = true
-    if (drag.current.moved) galleryRef.current.scrollLeft = drag.current.scroll - diff
+    if (!drag.current.down) return
+    if (Math.abs(e.clientX - drag.current.x) > 12) drag.current.moved = true
   }
-  const pointerEnd = () => { drag.current.down = false; setTimeout(() => { drag.current.moved = false }, 60) }
+  const pointerEnd = (e: PointerEvent<HTMLDivElement>) => {
+    if (!drag.current.down) return
+    const delta = e.clientX - drag.current.x
+    drag.current.down = false
+    if (Math.abs(delta) > 48) moveGallery(delta < 0 ? 1 : -1)
+    if (Math.abs(delta) > 12) drag.current.moved = true
+    window.setTimeout(() => { drag.current.moved = false }, 180)
+  }
   const onHeroPointer = (event: PointerEvent<HTMLElement>) => {
     if (event.pointerType === 'touch') return
     const rect = event.currentTarget.getBoundingClientRect()
@@ -186,18 +186,38 @@ export function BlueTradeExperience() {
       </div>
     </section>
 
-    {/* 03 — spacious product collection: touch + mouse-drag */}
-    <section className="ph-collection ph-pad">
-      <Heading label="02 / THE COLLECTION" title="A world of" accent="products.">Explore export product families and international import enquiries. Exact products and specifications are confirmed on request.</Heading>
-      <div className="ph-collection-toolbar ph-reveal"><span>FROM INDIAN FARMS, FOOD PROCESSORS & MANUFACTURERS</span><div><span>DRAG / SWIPE TO BROWSE</span><button onClick={() => moveGallery(-1)} aria-label="Previous categories"><ArrowLeft size={22}/></button><button onClick={() => moveGallery(1)} aria-label="Next categories"><ArrowRight size={22}/></button></div></div>
-      <div ref={galleryRef} className="ph-product-track" onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerEnd} onPointerLeave={pointerEnd}
-        onClickCapture={e => { if (drag.current.moved) { e.preventDefault(); e.stopPropagation() } }}>
-        {PRODUCT_CATEGORIES.map((category,index) => <Link to={`/products?category=${category.id}`} className="ph-product" draggable={false} key={category.id}>
-          <div className="ph-product-image"><img loading="lazy" src={HOME_CATEGORY_IMAGES[category.id] || category.image} alt={`Illustrative photograph for ${category.name}`} draggable={false} onError={e=>{e.currentTarget.onerror=null;e.currentTarget.src="/images/categories/cat-commodity.jpg"}}/><span>0{index+1}</span><span className="ph-product-view"><ArrowUpRight size={24}/></span></div>
-          <div className="ph-product-meta"><h3>{category.name}</h3><span>Explore category ↗</span></div>
-        </Link>)}
+    {/* 03 — immersive product range, inspired by editorial perspective carousels */}
+    <section className="ph-collection ph-pad ph-collection--cinematic" aria-label="Explore product categories">
+      <div className="ph-collection-intro ph-reveal">
+        <span className="ph-kicker">02 / THE COLLECTION</span>
+        <div className="ph-collection-intro-row">
+          <div><h2>Our product <em>range.</em></h2><p>From Indian farms to global markets. Drag or swipe to explore.</p></div>
+          <Link to="/products" className="ph-collection-explore">EXPLORE ALL PRODUCTS <ArrowUpRight size={17}/></Link>
+        </div>
       </div>
-      <div className="ph-collection-footer"><Link to="/products" className="ph-line-link">Explore the full collection <ArrowUpRight size={19}/></Link></div>
+      <div ref={galleryRef} className="ph-product-track ph-product-stage" role="region" aria-roledescription="carousel" aria-label="Product categories"
+        onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerEnd} onPointerCancel={() => { drag.current.down = false }}
+        onClickCapture={e => { if (drag.current.moved) { e.preventDefault(); e.stopPropagation() } }}>
+        {PRODUCT_CATEGORIES.map((category,index) => {
+          const length = PRODUCT_CATEGORIES.length
+          const raw = (index - activeProduct + length) % length
+          const offset = raw > length / 2 ? raw - length : raw
+          const isActive = offset === 0
+          const style = { '--offset': offset, '--distance': Math.abs(offset), '--visible': Math.abs(offset) > 2 ? 0 : 1 } as CSSProperties
+          return <Link to={`/products?category=${category.id}`} key={category.id}
+            className={`ph-product ph-perspective-card${isActive ? ' is-active' : ''}`}
+            style={style} draggable={false} tabIndex={Math.abs(offset) > 2 ? -1 : 0}
+            aria-label={`${category.name}, category ${index + 1} of ${length}`}>
+            <div className="ph-product-image"><img loading={Math.abs(offset) < 2 ? 'eager' : 'lazy'} src={HOME_CATEGORY_IMAGES[category.id] || category.image} alt={category.name} draggable={false} onError={e=>{e.currentTarget.onerror=null;e.currentTarget.src="/images/categories/cat-commodity.jpg"}}/>
+              <span className="ph-card-shade"/><span className="ph-card-title">{category.name}</span>
+            </div>
+          </Link>
+        })}
+      </div>
+      <div className="ph-collection-controls">
+        <div className="ph-current-category"><small>{String(activeProduct + 1).padStart(2, '0')} / {String(PRODUCT_CATEGORIES.length).padStart(2, '0')}</small><strong>{PRODUCT_CATEGORIES[activeProduct]?.name}</strong></div>
+        <div className="ph-collection-arrows"><button type="button" onClick={() => moveGallery(-1)} aria-label="Previous category"><ArrowLeft size={18}/></button><button type="button" onClick={() => moveGallery(1)} aria-label="Next category"><ArrowRight size={18}/></button></div>
+      </div>
     </section>
 
     {/* 04 — visible fullscreen, scroll-scrubbed editorial chapters */}
