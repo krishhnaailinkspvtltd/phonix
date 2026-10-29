@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Newsreader', 'Cormorant Garamond', Georgia, serif;
+  --font-editorial: 'Instrument Serif', 'Newsreader', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'DM Sans', monospace;
+  --font-tech: 'DM Sans', -apple-system, sans-serif;
+
+  --color-canvas: var(--bg-canvas);
+  --color-surface: var(--bg-surface);
+  --color-elevated: var(--bg-elevated);
+  --color-primary-text: var(--text-primary);
+  --color-secondary-text: var(--text-secondary);
+  --color-muted-text: var(--text-muted);
+  --color-accent: var(--accent-primary);
+  --color-accent-blue: var(--accent-secondary);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+  --color-glass-surface: var(--glass-bg);
+  --color-glass-edge: var(--glass-border);
+}
+
+/* Master Color System: The Art of Global Movement (Luxury Editorial + Architectural Trade) */
+:root {
+  --bg-canvas: #ffffff;
+  --bg-surface: #f2f6fb;
+  --bg-elevated: #ffffff;
+  --text-primary: #092b5b;
+  --text-secondary: #536a82;
+  --text-muted: #6e8095;
+  --accent-primary: #1663c1;
+  --accent-secondary: #0b377b;
+  --border-subtle: rgba(11, 55, 123, .12);
+  --border-strong: rgba(11, 55, 123, .25);
+  --glass-bg: rgba(255,255,255,.86);
+  --glass-border: rgba(11,55,123,.16);
+  --badge-bg: rgba(22,99,193,.06);
+  --badge-border: rgba(22,99,193,.2);
+  --shadow-subtle: 0 8px 25px rgba(7,40,81,.06);
+  --shadow-elevated: 0 15px 60px rgba(7,40,81,.14);
+}
+.dark {
+  --bg-canvas: #07182f;
+  --bg-surface: #102846;
+  --bg-elevated: #17355b;
+  --text-primary: #f5f9ff;
+  --text-secondary: #bed0e6;
+  --text-muted: #95aeca;
+  --accent-primary: #81b9ff;
+  --accent-secondary: #3e91f2;
+  --border-subtle: rgba(212,231,255,.12);
+  --border-strong: rgba(212,231,255,.25);
+  --glass-bg: rgba(11,35,68,.86);
+  --glass-border: rgba(212,231,255,.16);
+  --badge-bg: rgba(129,185,255,.1);
+  --badge-border: rgba(129,185,255,.25);
+  --shadow-subtle: 0 8px 25px rgba(0,0,0,.15);
+  --shadow-elevated: 0 15px 60px rgba(0,0,0,.3);
+}
+
+/* Global Resets & Typography Foundations */
+html, body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  letter-spacing: -0.012em;
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typographic Expressive Classes */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-editorial {
+  font-family: var(--font-editorial);
+  letter-spacing: -0.015em;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+  letter-spacing: -0.02em;
+}
+
+.font-tech {
+  font-family: var(--font-tech);
+  letter-spacing: -0.02em;
+}
+
+/* Fluid Editorial Scale */
+.display-hero {
+  font-size: clamp(4rem, 9vw, 11rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+}
+
+.display-heading {
+  font-size: clamp(3rem, 6vw, 7.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.display-subhead {
+  font-size: clamp(1.75rem, 3.2vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.editorial-body {
+  font-size: clamp(1.0625rem, 1.2vw, 1.25rem);
+  line-height: 1.68;
+}
+
+/* Architectural Lines */
+.arch-line {
+  border-color: var(--border-subtle);
+}
+
+.arch-line-strong {
+  border-color: var(--border-strong);
+}
+
+/* Refined Architectural Glass */
+.glass-nav {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-canvas);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Reduced Motion Guard */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
