@@ -42,3 +42,32 @@
 @media(max-width:768px){.ph-collection--cinematic{padding:78px 0 50px!important}.ph-collection-intro-row{align-items:flex-start;flex-direction:column;gap:18px}.ph-collection-intro h2{margin-top:17px}.ph-collection--cinematic .ph-product-stage{height:390px;margin-top:24px}.ph-collection--cinematic .ph-perspective-card{width:210px;height:310px;transform:translate(-50%,-50%) translateX(calc(var(--offset)*72%)) rotateY(calc(var(--offset)*-16deg)) scale(calc(1 - var(--distance)*.07))}.ph-collection--cinematic .ph-card-title{font-size:19px;left:17px;bottom:21px}.ph-current-category strong{font-size:15px}}
 @media(max-width:390px){.ph-collection--cinematic .ph-product-stage{height:330px}.ph-collection--cinematic .ph-perspective-card{width:185px;height:270px}}
 @media(prefers-reduced-motion:reduce){.ph-collection--cinematic .ph-perspective-card,.ph-collection--cinematic .ph-perspective-card img{transition:none!important;will-change:auto}}
+
+
+/* Rounded frosted-glass CTAs over the homepage's photographic panels. */
+.ph-home :is(.ph-hero,.ph-close) .ph-button--white{
+  border-radius:18px;
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(255,255,255,.78);
+  color:#102e54;
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:0 12px 32px rgba(2,20,44,.19),inset 0 1px 0 rgba(255,255,255,.7);
+  transition:background .3s ease,transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+}
+.ph-home :is(.ph-hero,.ph-close) .ph-button--white:hover{
+  background:rgba(255,255,255,.88);
+  border-color:rgba(255,255,255,.95);
+  transform:translateY(-4px);
+  box-shadow:0 18px 38px rgba(2,20,44,.23),inset 0 1px 0 #fff;
+}
+.ph-home :is(.ph-hero,.ph-close) .ph-button--white:focus-visible{
+  outline:3px solid #9ad4ff;outline-offset:4px;
+}
+@media(max-width:768px){
+  .ph-home :is(.ph-hero,.ph-close) .ph-button--white{border-radius:15px;-webkit-backdrop-filter:blur(12px) saturate(145%);backdrop-filter:blur(12px) saturate(145%)}
+}
+@media(prefers-reduced-motion:reduce){
+  .ph-home :is(.ph-hero,.ph-close) .ph-button--white{transition:none}
+  .ph-home :is(.ph-hero,.ph-close) .ph-button--white:hover{transform:none}
+}
