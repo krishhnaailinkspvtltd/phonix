@@ -17,6 +17,7 @@ import './creative.css'
 import './carysil-redesign.css'
 import './motion.css'
 import './mobile-experience.css'
+import './motion-fixes.css'
 
 function DemoNotice() {
   const { pathname } = useLocation()
