@@ -4,19 +4,27 @@ import { Link } from 'react-router-dom'
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { PRODUCT_CATEGORIES, PHOTO } from '@/data/tradeData'
+import { PRODUCT_CATEGORIES } from '@/data/tradeData'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const SCENES = [
   { number:'01', eyebrow:'EXPORTING FROM INDIA', title:'From India,', italic:'to the world.', description:'Bringing Indian food ingredients, agricultural products and manufactured goods into conversations with buyers worldwide.', image:'/images/hero/hero-port.jpg', position:'center' },
-  { number:'02', eyebrow:'DEHYDRATED VEGETABLES & FRUITS', title:'Goodness,', italic:'in every form.', description:'Explore onion, garlic, ginger, dried mango and other food ingredients based on your specifications.', image:PHOTO.driedVegetables, position:'center' },
-  { number:'03', eyebrow:'MADE IN INDIA', title:'Crafted here.', italic:'Chosen globally.', description:'From agricultural produce to textiles and manufacturer-made goods, discover Indian sourcing possibilities.', image:PHOTO.textile, position:'center' },
+  { number:'02', eyebrow:'DEHYDRATED VEGETABLES & FRUITS', title:'Goodness,', italic:'in every form.', description:'Explore onion, garlic, ginger, dried mango and other food ingredients based on your specifications.', image:'/images/categories/cat-commodity.jpg', position:'center' },
+  { number:'03', eyebrow:'MADE IN INDIA', title:'Crafted here.', italic:'Chosen globally.', description:'From agricultural produce to textiles and manufacturer-made goods, discover Indian sourcing possibilities.', image:'/images/panels/panel-3-logistics.jpg', position:'center' },
   { number:'04', eyebrow:'IMPORTING INTO INDIA', title:'The world,', italic:'within reach.', description:'We also welcome import enquiries for products from overseas suppliers to the Indian market.', image:'/images/hero/hero-vessel.jpg', position:'center' },
 ]
+const HOME_CATEGORY_IMAGES: Record<string, string> = {
+  'dehydrated-vegetables': '/images/categories/cat-commodity.jpg',
+  'dehydrated-fruits': '/images/gallery/gallery-5.jpg',
+  'spices-food': '/images/panels/panel-2-sourcing.jpg',
+  'agri-products': '/images/categories/cat-sourcing.jpg',
+  'manufactured-goods': '/images/panels/panel-3-logistics.jpg',
+  'imports': '/images/hero/hero-vessel.jpg',
+}
 const FEATURES = [
-  { title:'India to the world.', tag:'01 / EXPORTS', image:PHOTO.driedFruit, copy:'Dehydrated vegetables, fruit, spices and other India-origin products.' },
-  { title:'Made in India.', tag:'02 / MANUFACTURING', image:PHOTO.manufacturing, copy:'Explore textiles, household goods and products from Indian manufacturers.' },
+  { title:'India to the world.', tag:'01 / EXPORTS', image:'/images/categories/cat-commodity.jpg', copy:'Dehydrated vegetables, fruit, spices and other India-origin products.' },
+  { title:'Made in India.', tag:'02 / MANUFACTURING', image:'/images/panels/panel-3-logistics.jpg', copy:'Explore textiles, household goods and products from Indian manufacturers.' },
   { title:'The world to India.', tag:'03 / IMPORTS', image:'/images/hero/hero-port.jpg', copy:'International sourcing enquiries for buyers in the Indian market.' },
 ]
 
@@ -33,7 +41,12 @@ export function BlueTradeExperience() {
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const context = gsap.context(() => {
+    let context: gsap.Context | undefined
+    let initialized = false
+    const initialize = () => {
+      if (initialized) return
+      initialized = true
+      context = gsap.context(() => {
       const hero = homeRef.current?.querySelector('.ph-hero') as HTMLElement | null
       if (hero) {
         gsap.fromTo('.ph-hero-photo', { scale: 1.12 }, { scale: 1, duration: 2.5, ease: 'power2.out', delay: .2 })
@@ -51,6 +64,14 @@ export function BlueTradeExperience() {
           opacity: 1, y: 0, duration: 1.15, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 90%', once: true },
         })
+      })
+      gsap.fromTo('.ph-film', { y: 55, autoAlpha: 0 }, {
+        y: 0, autoAlpha: 1, duration: 1.05, stagger: .13, ease: 'power3.out',
+        scrollTrigger: { trigger: '.ph-film-row', start: 'top 88%', once: true },
+      })
+      gsap.fromTo('.ph-product', { y: 42, autoAlpha: 0 }, {
+        y: 0, autoAlpha: 1, duration: .9, stagger: .095, ease: 'power3.out',
+        scrollTrigger: { trigger: '.ph-product-track', start: 'top 89%', once: true },
       })
       gsap.utils.toArray<HTMLElement>('.ph-picture-reveal').forEach((el) => {
         gsap.fromTo(el, { clipPath: 'inset(10% 0 10% 0)', scale: .96 }, {
@@ -86,16 +107,29 @@ export function BlueTradeExperience() {
         })
         timeline.to({}, { duration: .38 })
       })
+      media.add('(max-width: 768px)', () => {
+        gsap.utils.toArray<HTMLElement>('.ph-story-scene').forEach((scene) => {
+          gsap.fromTo(scene.querySelector('.ph-story-copy'), { y: 30, autoAlpha: .5 }, {
+            y: 0, autoAlpha: 1, duration: .9, ease: 'power2.out',
+            scrollTrigger: { trigger: scene, start: 'top 80%', once: true },
+          })
+        })
+      })
       return () => media.revert()
-    }, homeRef)
-    const refresh = () => ScrollTrigger.refresh()
-    document.fonts?.ready.then(refresh)
-    window.addEventListener('phonix:intro-complete', refresh)
+      }, homeRef)
+      requestAnimationFrame(() => ScrollTrigger.refresh())
+      document.fonts?.ready.then(() => { if (initialized) ScrollTrigger.refresh() })
+    }
+    const refresh = () => { if (initialized) ScrollTrigger.refresh() }
+    window.addEventListener('phonix:intro-complete', initialize)
     window.addEventListener('load', refresh)
+    if (document.documentElement.classList.contains('pg-ready')) initialize()
+    const safety = window.setTimeout(initialize, 4200)
     return () => {
-      window.removeEventListener('phonix:intro-complete', refresh)
+      clearTimeout(safety)
+      window.removeEventListener('phonix:intro-complete', initialize)
       window.removeEventListener('load', refresh)
-      context.revert()
+      context?.revert()
     }
   }, [])
 
@@ -159,7 +193,7 @@ export function BlueTradeExperience() {
       <div ref={galleryRef} className="ph-product-track" onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerEnd} onPointerLeave={pointerEnd}
         onClickCapture={e => { if (drag.current.moved) { e.preventDefault(); e.stopPropagation() } }}>
         {PRODUCT_CATEGORIES.map((category,index) => <Link to={`/products?category=${category.id}`} className="ph-product" draggable={false} key={category.id}>
-          <div className="ph-product-image"><img loading="lazy" src={category.image} alt={`Illustrative photograph for ${category.name}`} draggable={false} onError={e=>{e.currentTarget.onerror=null;e.currentTarget.src="/images/categories/cat-commodity.jpg"}}/><span>0{index+1}</span><span className="ph-product-view"><ArrowUpRight size={24}/></span></div>
+          <div className="ph-product-image"><img loading="lazy" src={HOME_CATEGORY_IMAGES[category.id] || category.image} alt={`Illustrative photograph for ${category.name}`} draggable={false} onError={e=>{e.currentTarget.onerror=null;e.currentTarget.src="/images/categories/cat-commodity.jpg"}}/><span>0{index+1}</span><span className="ph-product-view"><ArrowUpRight size={24}/></span></div>
           <div className="ph-product-meta"><h3>{category.name}</h3><span>Explore category ↗</span></div>
         </Link>)}
       </div>
