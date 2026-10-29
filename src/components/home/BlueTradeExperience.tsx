@@ -43,16 +43,19 @@ export function BlueTradeExperience() {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     let context: gsap.Context | undefined
+    let media: gsap.MatchMedia | undefined
     let initialized = false
+    const refreshOnImage = () => { if (initialized) requestAnimationFrame(() => ScrollTrigger.refresh()) }
     const initialize = () => {
       if (initialized) return
       initialized = true
       context = gsap.context(() => {
       const hero = homeRef.current?.querySelector('.ph-hero') as HTMLElement | null
       if (hero) {
-        gsap.fromTo('.ph-hero-photo', { scale: 1.12 }, { scale: 1, duration: 2.5, ease: 'power2.out', delay: .2 })
+        // Do not compete with the scroll-driven photograph scale.
+        gsap.fromTo('.ph-hero-photo', { opacity: .78 }, { opacity: 1, duration: 1.55, ease: 'power2.out' })
         gsap.to('.ph-hero-photo', {
-          scale: 1.22, yPercent: 12, ease: 'none',
+          scale: 1.15, yPercent: 10, ease: 'none',
           scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true },
         })
         gsap.to('.ph-hero-content', {
@@ -66,9 +69,17 @@ export function BlueTradeExperience() {
           scrollTrigger: { trigger: el, start: 'top 90%', once: true },
         })
       })
-      gsap.fromTo('.ph-film', { y: 55, autoAlpha: 0 }, {
-        y: 0, autoAlpha: 1, duration: 1.05, stagger: .13, ease: 'power3.out',
-        scrollTrigger: { trigger: '.ph-film-row', start: 'top 88%', once: true },
+      gsap.fromTo('.ph-film', { y: 48, autoAlpha: .5 }, {
+        y: 0, autoAlpha: 1, duration: 1.05, stagger: .15, ease: 'power3.out',
+        clearProps: 'transform,opacity,visibility',
+        scrollTrigger: { trigger: '.ph-film-row', start: 'top 90%', once: true },
+      })
+      gsap.utils.toArray<HTMLImageElement>('.ph-film img').forEach(img => {
+        gsap.fromTo(img, { scale: 1.09 }, {
+          scale: 1, duration: 1.45, ease: 'power2.out',
+          clearProps: 'transform',
+          scrollTrigger: { trigger: img.parentElement, start: 'top 93%', once: true },
+        })
       })
       const collectionStage = homeRef.current?.querySelector<HTMLElement>('.ph-product-stage')
       if (collectionStage) {
@@ -83,7 +94,7 @@ export function BlueTradeExperience() {
         })
       })
 
-      const media = gsap.matchMedia()
+      media = gsap.matchMedia()
       media.add('(min-width: 769px)', () => {
         if (!storyRef.current) return
         const stage = storyRef.current.querySelector('.ph-story-stage') as HTMLElement
@@ -112,16 +123,29 @@ export function BlueTradeExperience() {
       })
       media.add('(max-width: 768px)', () => {
         gsap.utils.toArray<HTMLElement>('.ph-story-scene').forEach((scene) => {
-          gsap.fromTo(scene.querySelector('.ph-story-copy'), { y: 30, autoAlpha: .5 }, {
-            y: 0, autoAlpha: 1, duration: .9, ease: 'power2.out',
-            scrollTrigger: { trigger: scene, start: 'top 80%', once: true },
+          gsap.fromTo(scene.querySelector('.ph-story-copy'), { y: 34, autoAlpha: .7 }, {
+            y: 0, autoAlpha: 1, duration: 1.05, ease: 'power3.out',
+            clearProps: 'transform,opacity,visibility',
+            scrollTrigger: { trigger: scene, start: 'top 83%', once: true },
+          })
+          const image = scene.querySelector('.ph-story-image')
+          if (image) gsap.fromTo(image, { scale: 1.06 }, {
+            scale: 1, duration: 1.75, ease: 'power2.out',
+            clearProps: 'transform',
+            scrollTrigger: { trigger: scene, start: 'top 90%', once: true },
           })
         })
       })
-      return () => media.revert()
+      gsap.fromTo('.ph-close-photo', { scale: 1.09, yPercent: -3 }, {
+        scale: 1, yPercent: 3, ease: 'none',
+        scrollTrigger: { trigger: '.ph-close', start: 'top bottom', end: 'bottom top', scrub: 1 },
+      })
       }, homeRef)
       requestAnimationFrame(() => ScrollTrigger.refresh())
       document.fonts?.ready.then(() => { if (initialized) ScrollTrigger.refresh() })
+      homeRef.current?.querySelectorAll('img').forEach(img => {
+        if (!img.complete) img.addEventListener('load', refreshOnImage, { once: true })
+      })
     }
     const refresh = () => { if (initialized) ScrollTrigger.refresh() }
     window.addEventListener('phonix:intro-complete', initialize)
@@ -132,6 +156,8 @@ export function BlueTradeExperience() {
       clearTimeout(safety)
       window.removeEventListener('phonix:intro-complete', initialize)
       window.removeEventListener('load', refresh)
+      homeRef.current?.querySelectorAll('img').forEach(img => img.removeEventListener('load', refreshOnImage))
+      media?.revert()
       context?.revert()
     }
   }, [])
@@ -144,8 +170,9 @@ export function BlueTradeExperience() {
     const rect = e.currentTarget.getBoundingClientRect()
     const mx = Math.max(-1, Math.min(1, ((e.clientX - rect.left) / rect.width - .5) * 2))
     const my = Math.max(-1, Math.min(1, ((e.clientY - rect.top) / rect.height - .5) * 2))
-    e.currentTarget.style.setProperty('--mouse-x', mx.toFixed(3))
-    e.currentTarget.style.setProperty('--mouse-y', my.toFixed(3))
+    e.currentTarget.style.setProperty('--mouse-shift-x', `${(mx * 12).toFixed(2)}px`)
+    e.currentTarget.style.setProperty('--mouse-shift-y', `${(-my * 13).toFixed(2)}px`)
+    e.currentTarget.style.setProperty('--mouse-tilt', `${(mx * 3).toFixed(2)}deg`)
   }
   const pointerDown = (e: PointerEvent<HTMLDivElement>) => {
     if (e.pointerType === 'mouse' && e.button !== 0) return
@@ -220,7 +247,20 @@ export function BlueTradeExperience() {
           const raw = (index - activeProduct + length) % length
           const offset = raw > length / 2 ? raw - length : raw
           const isActive = offset === 0
-          const style = { '--offset': offset, '--distance': Math.abs(offset), '--visible': Math.abs(offset) > 2 ? 0 : 1, '--depth': offset } as CSSProperties
+          const distance = Math.abs(offset)
+          const style = {
+            '--offset': offset,
+            '--distance': distance,
+            '--visible': distance > 2 ? 0 : 1,
+            '--depth': offset,
+            '--card-shift': `${offset * 110}%`,
+            '--card-shift-mobile': `${offset * 72}%`,
+            '--card-angle': `${offset * -15}deg`,
+            '--card-angle-mobile': `${offset * -16}deg`,
+            '--card-roll': `${offset * -1.7}deg`,
+            '--card-scale': 1 - distance * .055,
+            '--card-scale-mobile': 1 - distance * .07,
+          } as CSSProperties
           return <Link to={`/products?category=${category.id}`} key={category.id}
             className={`ph-product ph-perspective-card${isActive ? ' is-active' : ''}`}
             style={style} draggable={false} tabIndex={Math.abs(offset) > 2 ? -1 : 0}
