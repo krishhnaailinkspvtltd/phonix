@@ -104,7 +104,9 @@ export function RouteEffects() {
 
 /** Thin, unobtrusive reading progress bar; updated without React rerenders. */
 export function ScrollProgress() {
+  const { pathname } = useLocation()
   useEffect(() => {
+    if (pathname === '/') return
     let frame = 0
     const rail = document.querySelector<HTMLElement>('.ph-scroll-progress')
     const paint = () => {
@@ -121,6 +123,7 @@ export function ScrollProgress() {
       window.removeEventListener('resize', schedule)
       cancelAnimationFrame(frame)
     }
-  }, [])
+  }, [pathname])
+  if (pathname === '/') return null
   return <div className="ph-scroll-progress" aria-hidden="true" />
 }
