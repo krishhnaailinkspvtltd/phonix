@@ -5,6 +5,7 @@ import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { PRODUCT_CATEGORIES } from '@/data/tradeData'
+import { WorldManifesto } from '@/components/home/WorldManifesto'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -210,8 +211,17 @@ export function BlueTradeExperience() {
         <h1><span className="ph-word-mask"><span>From India.</span></span><span className="ph-word-mask"><span><em>To the world.</em></span></span></h1>
         <div className="ph-hero-detail"><p>Exporting Indian products worldwide and exploring imports from international suppliers — one opportunity at a time.</p><Link to="/about" className="ph-button ph-button--white">Discover PHONIX <ArrowUpRight size={20}/></Link></div>
       </div>
+      <div className="phx-hero-side" aria-hidden="true">PHONIX GLOBAL TRADE — INDIA</div>
+      <div className="phx-hero-corner" aria-hidden="true">INDIA CONNECTED TO THE WORLD</div>
       <div className="ph-hero-edge"><span>INDIAN EXPORTS · GLOBAL IMPORTS</span><a href="#in-motion">SCROLL TO DISCOVER <ArrowDown size={18}/></a><span>01 / 06</span></div>
     </section>
+
+    <div className="phx-trade-ticker" aria-label="Indian products and global trade">
+      <span className="phx-trade-ticker-label">THE GLOBAL CONNECTION</span>
+      <div className="phx-trade-ticker-track" aria-hidden="true">
+        {Array.from({ length: 4 }, (_, index) => <span key={index}>INDIAN ORIGINS <i /> WORLDWIDE OPPORTUNITIES <i /> THOUGHTFUL SOURCING <i /></span>)}
+      </div>
+    </div>
 
     {/* 02 — reference-inspired three-panel film/editorial showcase */}
     <section className="ph-films ph-pad" id="in-motion">
@@ -289,6 +299,9 @@ export function BlueTradeExperience() {
         </article>)}
       </div>
     </section>
+
+    {/* New from the supplied motion archive: pinned word illumination and image reveals. */}
+    <WorldManifesto />
 
     {/* 05 — quiet, editorial credibility section; no fabricated metrics */}
     <section className="ph-philosophy ph-pad"><div className="ph-philosophy-photo ph-picture-reveal"><img loading="lazy" src="/images/hero/hero-vessel.jpg" alt="Aerial photograph of an international container port"/></div><div className="ph-philosophy-copy ph-reveal"><span className="ph-kicker">03 / INDIAN ROOTS</span><h2>Rooted in India.<br/><em>Open to the world.</em></h2><p>Our focus is on understanding buyer requirements, connecting with product sources, and discussing a suitable path for Indian exports and overseas imports.</p><Link to="/global-trade" className="ph-line-link">Explore import & export <ArrowUpRight size={19}/></Link></div></section>

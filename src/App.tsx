@@ -18,6 +18,7 @@ import './carysil-redesign.css'
 import './motion.css'
 import './mobile-experience.css'
 import './motion-fixes.css'
+import './phonix-motion-atelier.css'
 
 function DemoNotice() {
   const { pathname } = useLocation()
