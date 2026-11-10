@@ -492,3 +492,35 @@ body { -webkit-font-smoothing: antialiased; }
   .phx-manifesto .phx-word-wrap > span,
   .phx-manifesto .phx-frame-image { transform: none !important; opacity: 1 !important; clip-path: none !important; }
 }
+
+/* Mobile readability final pass — no body labels below 14px. */
+@media (max-width: 768px) {
+  .pg-app .pg-wordmark-sub { font-size: 13px; letter-spacing: .12em; }
+  .pg-app .pg-fullmenu-links a small,
+  .pg-app .pg-fullmenu-top small,
+  .pg-app .pg-fullmenu-bottom { font-size: 14px; }
+  .ph-home .ph-kicker,
+  .ph-home .ph-editorial-heading .ph-kicker,
+  .ph-home .ph-collection-intro .ph-kicker,
+  .ph-home .ph-philosophy .ph-kicker { font-size: 14px; }
+  .ph-home .ph-hero-kicker { font-size: 14px; }
+  .ph-home .ph-hero-edge a { font-size: 14px; }
+  .ph-home .ph-film-instruction { font-size: 14px; }
+  .ph-home .ph-film-label { font-size: 14px; }
+  .ph-home .ph-collection-explore { font-size: 14px; }
+  .ph-home .ph-current-category small { font-size: 14px; }
+  .ph-home .ph-story-top, .ph-home .ph-story-foot { font-size: 13px; }
+  .ph-home .ph-story-copy .ph-kicker { font-size: 14px; }
+  .phx-manifesto-eyebrow { font-size: 14px; }
+  .phx-manifesto-top, .phx-manifesto-bottom { font-size: 14px; }
+  .phx-manifesto-bottom span:last-child { display: none; }
+  .phx-trade-ticker, .phx-trade-ticker-label { font-size: 13px; }
+  .phx-frame figcaption { font-size: 12px; }
+  .pg-footer-directory > span,
+  .pg-footer-end,
+  .pg-footer-end button { font-size: 14px; }
+}
+@media (max-width: 390px) {
+  .ph-home .ph-story-top, .ph-home .ph-story-foot { font-size: 12px; }
+  .ph-home .phx-manifesto-eyebrow { font-size: 14px; }
+}
