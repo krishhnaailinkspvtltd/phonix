@@ -42,22 +42,25 @@ export function RouteEffects() {
     const register = (el: HTMLElement, type: 'heading' | 'card' | 'image') => {
       if (observed.has(el) || el.closest('[role="dialog"], .pg-gallery-lightbox')) return
       observed.add(el)
-      const distance = type === 'heading' ? 30 : type === 'card' ? 32 : 0
+      const distance = type === 'heading' ? 36 : type === 'card' ? 27 : 0
       const trigger = ScrollTrigger.create({
         trigger: el,
         start: 'top 94%',
         once: true,
         onEnter: () => {
           if (!active || !el.isConnected) return
+          // From the supplied motion archive: a subtle photographic clip-path
+          // wipe paired with image scale-settle. No hidden pre-animation state.
           const from = type === 'image'
-            ? { scale: 1.065, opacity: .65 }
-            : { y: distance, opacity: .2 }
-          tweens.push(gsap.fromTo(el, from, {
-            y: 0, scale: 1, opacity: 1,
-            duration: type === 'image' ? 1.15 : .83,
-            ease: type === 'image' ? 'power2.out' : 'power3.out',
-            clearProps: 'transform,opacity,visibility',
-          }))
+            ? { scale: 1.075, opacity: .87, clipPath: 'inset(0% 0% 9% 0%)' }
+            : { y: distance, opacity: .45 }
+          const to = type === 'image'
+            ? { scale: 1, opacity: 1, clipPath: 'inset(0% 0% 0% 0%)',
+                duration: 1.2, ease: 'power3.inOut', clearProps: 'transform,opacity,clipPath' }
+            : { y: 0, opacity: 1,
+                duration: type === 'heading' ? 1.05 : .9,
+                ease: 'power3.out', clearProps: 'transform,opacity,visibility' }
+          tweens.push(gsap.fromTo(el, from, to))
         },
       })
       triggers.push(trigger)
@@ -70,11 +73,15 @@ export function RouteEffects() {
         .forEach(el => {
           if (!el.closest('.group, article, form') || el.matches('.group, article, form')) register(el, 'card')
         })
-      root.querySelectorAll<HTMLElement>('section h2, section h3').forEach(el => {
+      root.querySelectorAll<HTMLElement>('h1, section h2, section h3').forEach(el => {
         if (!el.closest('article, .group, form')) register(el, 'heading')
       })
-      root.querySelectorAll<HTMLImageElement>('section img').forEach(el => {
-        if (!el.closest('article, .group, form, button, a')) register(el, 'image')
+      // Image wipes work in product, gallery, about and trade cards as well.
+      // Ignore thumbnails, dialogs and icon graphics; never hide media by CSS.
+      root.querySelectorAll<HTMLImageElement>('section img, .grid img').forEach(el => {
+        if (el.closest('form, [role="dialog"]') || el.classList.contains('h-full') && el.closest('button[aria-label^="View product image"]')) return
+        el.dataset.phxWipe = 'true'
+        register(el, 'image')
       })
       refresh()
     }
