@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { Fragment, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, ArrowDownRight } from 'lucide-react'
 import gsap from 'gsap'
@@ -83,9 +83,9 @@ export function WorldManifesto() {
       <div className="phx-manifesto-content">
         <div className="phx-manifesto-copy">
           <p className="phx-manifesto-eyebrow">03 / BEYOND BORDERS</p>
-          <h2 id="phx-manifesto-heading" className="phx-manifesto-heading">
+          <h2 id="phx-manifesto-heading" className="phx-manifesto-heading" aria-label={MESSAGE}>
             {WORDS.map((word, index) => (
-              <span className="phx-word-wrap" key={index}><span data-phx-word>{word}</span>{index < WORDS.length - 1 ? ' ' : null}</span>
+              <Fragment key={index}>{index > 0 ? ' ' : null}<span className="phx-word-wrap"><span data-phx-word>{word}</span></span></Fragment>
             ))}
           </h2>
           <p className="phx-manifesto-description">Thoughtful sourcing. Clear conversations. New opportunities across borders. We help connect enquiries with the right product possibilities.</p>
