@@ -11,7 +11,9 @@ const WORDS = MESSAGE.split(' ')
 
 /**
  * A Phonix-original editorial interlude using the supplied motion pack's
- * split-headline, pinned-manifesto, image-wipe and parallax techniques.
+ * split-headline, image-wipe and parallax techniques. The section deliberately
+ * does not pin: two adjacent pinned regions created overlapping GSAP pin-spacers
+ * and a white gap before this section on desktop.
  * All imagery and copy belong to the Phonix project.
  */
 export function WorldManifesto() {
@@ -30,21 +32,21 @@ export function WorldManifesto() {
       const large = window.matchMedia('(min-width: 1024px)').matches && window.innerHeight >= 860
 
       if (large) {
-        gsap.set(words, { opacity: 0.15 })
-        const timeline = gsap.timeline({
+        // Scroll-driven visual narrative, with no extra document-height pin spacer.
+        gsap.fromTo(words, { opacity: 0.28, y: 20 }, {
+          opacity: 1, y: 0, stagger: 0.045, ease: 'none',
           scrollTrigger: {
-            trigger: section,
-            start: 'top top',
-            end: '+=130%',
-            scrub: 0.9,
-            pin: true,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
+            trigger: section, start: 'top 84%', end: 'center 48%',
+            scrub: 0.8, invalidateOnRefresh: true,
           },
         })
-        timeline.to(words, { opacity: 1, y: 0, duration: 1, stagger: 0.045, ease: 'none' }, 0)
-        timeline.fromTo(frames, { opacity: 0.25, y: 55, scale: 0.96 },
-          { opacity: 1, y: 0, scale: 1, stagger: 0.16, duration: 0.9, ease: 'power2.out' }, 0.18)
+        gsap.fromTo(frames, { opacity: 0.65, y: 35, scale: 0.98 }, {
+          opacity: 1, y: 0, scale: 1, stagger: 0.15, ease: 'power2.out',
+          scrollTrigger: {
+            trigger: section, start: 'top 76%', end: 'center 45%',
+            scrub: 0.7, invalidateOnRefresh: true,
+          },
+        })
       } else {
         gsap.fromTo(words, { yPercent: 38, opacity: 0.25 },
           { yPercent: 0, opacity: 1, stagger: 0.035, duration: 0.72, ease: 'power3.out',
