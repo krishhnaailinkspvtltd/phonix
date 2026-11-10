@@ -29,7 +29,7 @@ export function ContactPage(){
   'Destination / origin: '+(form.destination||'To be discussed'),
   'Subject: '+(form.subject||'Product enquiry'),
   'Requirements: '+form.message,
- ].join('\\n')
+ ].join('\n')
  const copyEnquiry=async()=>{
   try { await navigator.clipboard.writeText(enquiryText); setCopied(true); setCopyError('') }
   catch { setCopyError('Copy is unavailable in this browser. Please select the enquiry details and copy them manually.') }
