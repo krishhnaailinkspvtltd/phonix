@@ -114,7 +114,9 @@ export function BlueTradeExperience() {
           const photo = scene.querySelector('.ph-story-image')
           const copy = scene.querySelector('.ph-story-copy')
           gsap.set(photo, { scale: 1.18 })
-          gsap.set(copy, { y: 85, opacity: 0 })
+          // Retain the original -38% vertical centering. An animated y value
+          // otherwise replaces the CSS transform and pushes captions into the footer.
+          gsap.set(copy, { yPercent: -38, y: 85, opacity: 0 })
           timeline.to(previous.querySelector('.ph-story-image'), { scale: 1.17, duration: 1, ease: 'none' }, index * 1.15)
           timeline.to(scene, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1, ease: 'none' }, index * 1.15)
           timeline.to(photo, { scale: 1, duration: 1, ease: 'none' }, index * 1.15)
