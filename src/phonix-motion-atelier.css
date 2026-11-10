@@ -298,3 +298,229 @@ body { -webkit-font-smoothing: antialiased; }
   .phx-word-wrap>span { opacity: 1 !important; transform: none !important; }
   .phx-frame { opacity: 1 !important; transform: none !important; }
 }
+
+
+/* PHONIX 2026 final QA: readable typography and stable section flow. */
+
+/* Pin-container failsafe: the storytelling canvas never exposes white if a
+   late font/image refresh briefly shifts the animation's pinned stage. */
+.ph-home .ph-story,
+.ph-home .ph-story > .pin-spacer {
+  background-color: #082a52;
+}
+.ph-home .phx-manifesto {
+  background-color: #081e3c;
+}
+.ph-home .ph-story-copy { max-width: 1200px; }
+.ph-home .ph-story-copy h2 {
+  font-size: clamp(70px, 7.9vw, 124px);
+  line-height: .98;
+  margin-block: 20px 23px;
+}
+.ph-home .ph-story-copy p {
+  font-size: clamp(18px, 1.32vw, 21px);
+  line-height: 1.56;
+  max-width: 560px;
+}
+/* Clear, consistent reading hierarchy on all desktop marketing surfaces. */
+.pg-app { font-size: 16px; line-height: 1.55; }
+.pg-app .pg-nav-links a { font-size: clamp(15px, 1.05vw, 17px); }
+.pg-app .pg-wordmark-sub { font-size: 12px; letter-spacing: .18em; }
+.pg-app .pg-nav-contact { font-size: 15px; }
+.pg-app .pg-fullmenu-links a small { font-size: 14px; }
+.pg-app .pg-fullmenu-top small { font-size: 14px; }
+.pg-app .pg-fullmenu-bottom { font-size: 14px; }
+.pg-app .pg-eyebrow { font-size: 14px; line-height: 1.6; }
+.pg-app .pg-demo-notice { font-size: 14px; }
+.ph-intro-header, .ph-intro-bottom { font-size: 14px; }
+.ph-intro-header button { font-size: 14px; }
+
+.ph-home .ph-kicker,
+.ph-home .ph-editorial-heading .ph-kicker,
+.ph-home .ph-collection-intro .ph-kicker,
+.ph-home .ph-philosophy .ph-kicker {
+  font-size: clamp(14px, 1.02vw, 16px);
+  letter-spacing: .105em;
+  line-height: 1.65;
+}
+.ph-home .ph-hero-kicker {
+  font-size: clamp(14px, 1.05vw, 16px);
+  letter-spacing: .13em;
+}
+.ph-home .ph-hero-edge {
+  font-size: 14px;
+  letter-spacing: .08em;
+  line-height: 1.4;
+}
+.ph-home .ph-button { font-size: 16px; }
+.phx-hero-side { font-size: 13px; }
+.phx-hero-corner { font-size: 14px; }
+.phx-trade-ticker {
+  font-size: 14px;
+  letter-spacing: .12em;
+  min-height: 57px;
+}
+.phx-trade-ticker-label {
+  font-size: 13px;
+  letter-spacing: .09em;
+}
+.ph-home .ph-film-instruction {
+  font-size: 14px;
+  letter-spacing: .09em;
+}
+.ph-home .ph-film-label {
+  font-size: 13px;
+  letter-spacing: .09em;
+}
+.ph-home .ph-film-body > span { font-size: 17px; }
+.ph-home .ph-collection-intro p { font-size: 17px; }
+.ph-home .ph-collection-explore { font-size: 14px; letter-spacing: .08em; }
+.ph-home .ph-current-category small { font-size: 14px; }
+.ph-home .ph-current-category strong { font-size: 18px; }
+.ph-home .ph-story-top,
+.ph-home .ph-story-foot {
+  font-size: 14px;
+  letter-spacing: .07em;
+  line-height: 1.5;
+}
+.ph-home .ph-story-copy .ph-kicker { font-size: 15px; }
+.ph-home .ph-story-copy p { color: #f1f7ff; }
+.ph-home .ph-line-link { font-size: 17px; }
+
+.phx-manifesto-eyebrow {
+  font-size: 14px;
+  letter-spacing: .13em;
+}
+.phx-manifesto-top,
+.phx-manifesto-bottom {
+  font-size: 13px;
+  letter-spacing: .08em;
+  line-height: 1.5;
+}
+.phx-manifesto-description { font-size: clamp(17px,1.15vw,19px); }
+.phx-manifesto-link { font-size: 16px; }
+.phx-frame figcaption { font-size: 13px; letter-spacing: .08em; }
+.phx-orbit-mark span:last-child { font-size: 9px; letter-spacing: .1em; }
+
+/* Inner-page catalog, contact and gallery: legible controls and metadata. */
+.pg-app #main-content > div:not(.ph-home) .text-xs,
+.pg-app #main-content > div:not(.ph-home) [class*="text-[10px]"],
+.pg-app #main-content > div:not(.ph-home) [class*="text-[11px]"],
+.pg-app #main-content > div:not(.ph-home) [class*="text-[12px]"],
+.pg-app #main-content > div:not(.ph-home) [class*="text-[13px]"] {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.pg-app #main-content > div:not(.ph-home) .text-sm {
+  font-size: 16px;
+  line-height: 1.6;
+}
+.pg-app #main-content > div:not(.ph-home) :is(p, li) {
+  line-height: 1.7;
+}
+.pg-app #main-content > div:not(.ph-home) :is(button, input, select, textarea) {
+  font-size: max(15px, 1rem);
+}
+.pg-app #main-content > div:not(.ph-home) :is(input, select, textarea) {
+  min-height: 44px;
+  font-size: 16px;
+}
+.pg-footer-directory > span { font-size: 14px; }
+.pg-footer-directory a { font-size: 16px; }
+.pg-footer-end,
+.pg-footer-end button { font-size: 14px; line-height: 1.5; }
+.pg-footer-action { font-size: 17px; }
+
+@media (min-width: 769px) and (max-height: 760px) {
+  /* Short desktops: the pinned story must leave room for its bottom rail. */
+  .ph-home .ph-story-copy h2 { font-size: clamp(56px, 6.8vw, 92px); }
+  .ph-home .ph-story-copy p { font-size: 17px; }
+  .ph-home .ph-story-copy h2 { margin-block: 15px 16px; }
+  .ph-home .ph-story-top { top: 6vh; }
+  .ph-home .ph-story-foot { bottom: 3vh; }
+}
+@media (max-width: 990px) {
+  .pg-app .pg-wordmark-sub { font-size: 11.5px; }
+  .ph-home .ph-film-instruction { font-size: 13px; }
+  .ph-home .ph-story-copy h2 { font-size: clamp(57px, 9vw, 89px); }
+}
+@media (max-width: 768px) {
+  .pg-app { font-size: 16px; }
+  .pg-app .pg-demo-notice { font-size: 14px; }
+  .pg-app .pg-fullmenu-links a small,
+  .pg-app .pg-fullmenu-top small,
+  .pg-app .pg-fullmenu-bottom { font-size: 13px; }
+  .ph-home .ph-hero-kicker { font-size: 13px; letter-spacing: .08em; }
+  .ph-home .ph-hero-edge { font-size: 12px; padding-block: 13px; }
+  .ph-home .ph-hero-edge span:first-child { display: none; }
+  .ph-home .ph-hero-edge a { font-size: 13px; }
+  .ph-home .ph-hero-detail p { font-size: 16px; }
+  .ph-home .ph-button { font-size: 15px; }
+  .ph-home .ph-kicker,
+  .ph-home .ph-editorial-heading .ph-kicker,
+  .ph-home .ph-collection-intro .ph-kicker,
+  .ph-home .ph-philosophy .ph-kicker { font-size: 13px; letter-spacing: .08em; }
+  .phx-trade-ticker { font-size: 12px; min-height: 48px; }
+  .phx-trade-ticker-label { font-size: 12px; }
+  .ph-home .ph-film-instruction { font-size: 13px; }
+  .ph-home .ph-film-label { font-size: 12px; }
+  .ph-home .ph-film-body > span { font-size: 15px; }
+  .ph-home .ph-collection-intro p { font-size: 16px; }
+  .ph-home .ph-collection-explore { font-size: 13px; }
+  .ph-home .ph-current-category small { font-size: 13px; }
+  .ph-home .ph-story-top, .ph-home .ph-story-foot {
+    font-size: 12px;
+    letter-spacing: .02em;
+  }
+  .ph-home .ph-story-copy .ph-kicker { font-size: 13px; }
+  .ph-home .ph-story-copy h2 { font-size: clamp(44px, 11vw, 75px); }
+  .ph-home .ph-story-copy p { font-size: 16px; }
+  .phx-manifesto-top, .phx-manifesto-bottom { font-size: 12px; }
+  .phx-manifesto-eyebrow { font-size: 13px; }
+  .phx-manifesto-description { font-size: 16px; }
+  .phx-frame figcaption { font-size: 11px; }
+  .pg-footer-directory > span { font-size: 13px; }
+  .pg-footer-end, .pg-footer-end button { font-size: 13px; }
+}
+@media (max-width: 390px) {
+  .ph-home .ph-hero-edge { gap: 8px; }
+  .ph-home .ph-story-top, .ph-home .ph-story-foot { gap: 8px; }
+  .ph-home .ph-story-copy h2 { font-size: clamp(42px, 11vw, 58px); }
+  .phx-manifesto-bottom span:last-child { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phx-manifesto .phx-word-wrap > span,
+  .phx-manifesto .phx-frame-image { transform: none !important; opacity: 1 !important; clip-path: none !important; }
+}
+
+/* Mobile readability final pass — no body labels below 14px. */
+@media (max-width: 768px) {
+  .pg-app .pg-wordmark-sub { font-size: 13px; letter-spacing: .12em; }
+  .pg-app .pg-fullmenu-links a small,
+  .pg-app .pg-fullmenu-top small,
+  .pg-app .pg-fullmenu-bottom { font-size: 14px; }
+  .ph-home .ph-kicker,
+  .ph-home .ph-editorial-heading .ph-kicker,
+  .ph-home .ph-collection-intro .ph-kicker,
+  .ph-home .ph-philosophy .ph-kicker { font-size: 14px; }
+  .ph-home .ph-hero-kicker { font-size: 14px; }
+  .ph-home .ph-hero-edge a { font-size: 14px; }
+  .ph-home .ph-film-instruction { font-size: 14px; }
+  .ph-home .ph-film-label { font-size: 14px; }
+  .ph-home .ph-collection-explore { font-size: 14px; }
+  .ph-home .ph-current-category small { font-size: 14px; }
+  .ph-home .ph-story-top, .ph-home .ph-story-foot { font-size: 13px; }
+  .ph-home .ph-story-copy .ph-kicker { font-size: 14px; }
+  .phx-manifesto-eyebrow { font-size: 14px; }
+  .phx-manifesto-top, .phx-manifesto-bottom { font-size: 14px; }
+  .phx-manifesto-bottom span:last-child { display: none; }
+  .phx-trade-ticker, .phx-trade-ticker-label { font-size: 13px; }
+  .phx-frame figcaption { font-size: 12px; }
+  .pg-footer-directory > span,
+  .pg-footer-end,
+  .pg-footer-end button { font-size: 14px; }
+}
+@media (max-width: 390px) {
+  .ph-home .ph-story-top, .ph-home .ph-story-foot { font-size: 13px; }
+  .ph-home .phx-manifesto-eyebrow { font-size: 14px; }
+}
