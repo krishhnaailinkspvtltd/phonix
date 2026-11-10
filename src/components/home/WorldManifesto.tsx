@@ -25,6 +25,7 @@ export function WorldManifesto() {
     const ctx = gsap.context(() => {
       const words = gsap.utils.toArray<HTMLElement>('[data-phx-word]')
       const frames = gsap.utils.toArray<HTMLElement>('[data-phx-frame]')
+      const reveals = gsap.utils.toArray<HTMLElement>('.phx-frame-image')
       const images = gsap.utils.toArray<HTMLElement>('[data-phx-image]')
       const large = window.matchMedia('(min-width: 1024px)').matches && window.innerHeight >= 860
 
@@ -53,6 +54,12 @@ export function WorldManifesto() {
             scrollTrigger: { trigger: section, start: 'top 82%', once: true } })
       }
 
+      reveals.forEach((reveal) => {
+        gsap.fromTo(reveal, { clipPath: 'inset(0% 0% 100% 0%)' }, {
+          clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'power3.inOut',
+          scrollTrigger: { trigger: reveal, start: 'top 86%', once: true },
+        })
+      })
       images.forEach((image) => {
         gsap.fromTo(image, { scale: 1.13 }, {
           scale: 1, duration: 1.35, ease: 'power3.out',
@@ -78,7 +85,7 @@ export function WorldManifesto() {
           <p className="phx-manifesto-eyebrow">03 / BEYOND BORDERS</p>
           <h2 id="phx-manifesto-heading" className="phx-manifesto-heading">
             {WORDS.map((word, index) => (
-              <span className="phx-word-wrap" key={index}><span data-phx-word>{word}</span></span>
+              <span className="phx-word-wrap" key={index}><span data-phx-word>{word}</span>{index < WORDS.length - 1 ? ' ' : null}</span>
             ))}
           </h2>
           <p className="phx-manifesto-description">Thoughtful sourcing. Clear conversations. New opportunities across borders. We help connect enquiries with the right product possibilities.</p>
