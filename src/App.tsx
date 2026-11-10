@@ -19,12 +19,7 @@ import './motion.css'
 import './mobile-experience.css'
 import './motion-fixes.css'
 import './phonix-motion-atelier.css'
-
-function DemoNotice() {
-  const { pathname } = useLocation()
-  if (pathname === '/') return null
-  return <aside className="pg-demo-notice" role="note">Product imagery and example listings are illustrative. Confirm specifications and availability directly with PHONIX.</aside>
-}
+import './phonix-final-polish.css'
 
 function ScrollOnRouteChange() {
   const { pathname } = useLocation()
@@ -66,7 +61,6 @@ export default function App() {
         <div className="pg-app min-h-screen bg-canvas text-primary-text">
           <Navigation />
           <main id="main-content">
-            <DemoNotice />
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />
