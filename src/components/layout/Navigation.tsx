@@ -12,16 +12,32 @@ export const NAV_LINKS = [
 export function Navigation() {
   const location = useLocation()
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const [open, setOpen] = useState(false)
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 55)
-    handler(); window.addEventListener('scroll', handler, { passive: true })
+    let previous = window.scrollY
+    const handler = () => {
+      const current = window.scrollY
+      setScrolled(current > 55)
+      if (current < 90 || open || window.matchMedia('(max-width: 768px)').matches) {
+        setHidden(false)
+        previous = current
+      } else if (current - previous > 14) {
+        setHidden(true)
+        previous = current
+      } else if (previous - current > 10) {
+        setHidden(false)
+        previous = current
+      }
+    }
+    handler()
+    window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
-  }, [location.pathname])
+  }, [location.pathname, open])
   useEffect(() => { setOpen(false) }, [location.pathname])
   const overHero = location.pathname === '/' && !scrolled
   return <>
-    <header className={`pg-header ${overHero ? 'pg-header--over-hero' : 'pg-header--solid'} ${scrolled ? 'pg-header--scrolled' : ''}`}>
+    <header className={`pg-header ${overHero ? 'pg-header--over-hero' : 'pg-header--solid'} ${scrolled ? 'pg-header--scrolled' : ''} ${hidden ? 'phx-header--hidden' : ''}`}>
       <nav className="pg-nav" aria-label="Primary navigation">
         <Link to="/" className="pg-wordmark" aria-label="PHONIX GLOBAL TRADE home"><span className="pg-wordmark-main">PHONIX<span className="pg-period">.</span></span><span className="pg-wordmark-sub">GLOBAL TRADE</span></Link>
         <div className="pg-nav-links">{NAV_LINKS.map(link => <NavLink key={link.path} to={link.path} end={link.path === '/'} className={({ isActive }) => isActive ? 'active' : ''}>{link.label}</NavLink>)}</div>
