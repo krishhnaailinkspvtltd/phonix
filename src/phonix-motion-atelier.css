@@ -521,6 +521,6 @@ body { -webkit-font-smoothing: antialiased; }
   .pg-footer-end button { font-size: 14px; }
 }
 @media (max-width: 390px) {
-  .ph-home .ph-story-top, .ph-home .ph-story-foot { font-size: 12px; }
+  .ph-home .ph-story-top, .ph-home .ph-story-foot { font-size: 13px; }
   .ph-home .phx-manifesto-eyebrow { font-size: 14px; }
 }
