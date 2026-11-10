@@ -18,7 +18,7 @@ export function ProductDetailPage() {
         <div className="lg:col-span-7">
           <div className="aspect-[5/4] bg-surface overflow-hidden"><img src={images[imageIndex]} alt={`Illustrative photo for ${product.title}`} className="w-full h-full object-cover" onError={e=>{e.currentTarget.onerror=null;e.currentTarget.src='/images/categories/cat-commodity.jpg'}} /></div>
           {images.length>1&&<div className="flex gap-2 mt-3">{images.map((img,i)=><button key={img} onClick={()=>setImageIndex(i)} aria-label={`View product image ${i+1}`} className={`h-18 w-24 border-2 ${i===imageIndex?'border-accent':'border-transparent'}`}><img src={img} alt="" className="w-full h-full object-cover"/></button>)}</div>}
-          <p className="mt-3 text-sm text-secondary-text">Illustrative image. Actual product appearance and specifications to be confirmed.</p>
+          <p className="mt-3 text-sm text-secondary-text">Representative product photography. Final appearance and specifications are confirmed during enquiry.</p>
         </div>
         <div className="lg:col-span-5">
           <p className="text-accent text-xs font-semibold tracking-[.16em] uppercase mb-4">{product.category} / Product enquiry</p>
