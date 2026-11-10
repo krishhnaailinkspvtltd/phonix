@@ -213,7 +213,7 @@ export function BlueTradeExperience() {
         <h1><span className="ph-word-mask"><span>From India.</span></span><span className="ph-word-mask"><span><em>To the world.</em></span></span></h1>
         <div className="ph-hero-detail"><p>Exporting Indian products worldwide and exploring imports from international suppliers — one opportunity at a time.</p><Link to="/about" className="ph-button ph-button--white">Discover PHONIX <ArrowUpRight size={20}/></Link></div>
       </div>
-      <div className="ph-hero-edge"><span>INDIAN EXPORTS · GLOBAL IMPORTS</span><a href="#in-motion">SCROLL TO DISCOVER <ArrowDown size={18}/></a><span>01 / 06</span></div>
+      <div className="ph-hero-edge"><a href="#in-motion">SCROLL TO DISCOVER <ArrowDown size={18}/></a><span>01 / 06</span></div>
     </section>
 
     <div className="phx-trade-ticker" aria-label="Indian products and global trade">
