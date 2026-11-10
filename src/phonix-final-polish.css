@@ -1,0 +1,225 @@
+/*
+ * PHONIX GLOBAL TRADE — Final design and motion polish
+ * Adapted from the supplied motion library's reveal / wipe / magnetic hover /
+ * film-strip / coverflow interaction patterns. All brand and media remain Phonix.
+ *
+ * This is intentionally the last stylesheet so newer design rules do not need
+ * scattered !important overrides in the legacy theme layers.
+ */
+
+/* Remove unwanted top-right badge, vertical wordmark and the large hero frame.
+   The bottom discovery prompt remains, but without its ornamental rule. */
+.ph-home .ph-hero::before,
+.ph-home .ph-hero::after,
+.ph-home .phx-hero-corner,
+.ph-home .phx-hero-side { content: none !important; display: none !important; }
+.ph-home .ph-hero-edge {
+  border: 0;
+  justify-content: space-between;
+  background: linear-gradient(180deg, transparent, rgba(4, 18, 38, .24));
+}
+.ph-home .ph-hero-edge > span { opacity: .78; }
+.ph-home .ph-hero-edge a {
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: .09em;
+  text-decoration: none;
+  transition: color .3s ease, transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.ph-home .ph-hero-edge a:hover { color: #d3eaff; transform: translateY(-2px); }
+.ph-home .ph-hero-kicker { letter-spacing: .12em; }
+.ph-home .ph-hero-photo { filter: saturate(.95) contrast(1.08); }
+.ph-home .ph-hero-detail .ph-button {
+  min-height: 56px; border-radius: 50px !important;
+}
+.ph-home .ph-hero-detail .ph-button:hover { transform: translateY(-3px) !important; }
+
+/* A consistent editorial system across About / Products / Trade / Gallery /
+   Detail / Contact; preserves existing content and routing. */
+.pg-app #main-content > div:not(.ph-home) {
+  background: linear-gradient(180deg, #fbfdff 0%, #f5f9ff 65%, #ffffff 100%);
+  color: #0c2d54;
+  min-height: 62vh;
+}
+.pg-app #main-content > div:not(.ph-home) > :first-child {
+  scroll-margin-top: 98px;
+}
+.pg-app #main-content > div:not(.ph-home) h1 {
+  text-wrap: balance;
+  letter-spacing: -.064em;
+  line-height: 1.02;
+}
+.pg-app #main-content > div:not(.ph-home) h2 {
+  text-wrap: balance;
+  letter-spacing: -.045em;
+}
+.pg-app #main-content > div:not(.ph-home) p {
+  line-height: 1.75;
+}
+.pg-app #main-content > div:not(.ph-home) p.text-secondary-text,
+.pg-app #main-content > div:not(.ph-home) .text-secondary-text {
+  color: #4c637f;
+}
+.pg-app #main-content > div:not(.ph-home) :is(section, article) {
+  scroll-margin-top: 90px;
+}
+.pg-app #main-content > div:not(.ph-home) :is(.text-xs, .text-sm) {
+  font-size: max(14px, .9rem);
+}
+.pg-app #main-content > div:not(.ph-home) .text-base { font-size: 16px; }
+.pg-app #main-content > div:not(.ph-home) .text-lg { font-size: clamp(17px,1.3vw,20px); }
+
+/* Sharp-but-soft photographic cards, with a restrained zoom and corner reveal. */
+.pg-app #main-content > div:not(.ph-home) .group,
+.pg-app #main-content > div:not(.ph-home) .grid > button,
+.pg-app #main-content > div:not(.ph-home) .grid > a {
+  border-radius: 20px;
+  transition: box-shadow .55s cubic-bezier(.16,1,.3,1),
+              transform .55s cubic-bezier(.16,1,.3,1),
+              border-color .45s ease;
+}
+.pg-app #main-content > div:not(.ph-home) :is(.group, .grid > button, .grid > a):hover {
+  box-shadow: 0 22px 58px -42px rgba(5,39,85,.36);
+}
+.pg-app #main-content > div:not(.ph-home) img { backface-visibility: hidden; }
+.pg-app #main-content > div:not(.ph-home) :is([class*="aspect-"], [class*="min-h-"]) > img {
+  object-position: center;
+}
+.pg-app #main-content > div:not(.ph-home) .group [class*="aspect-"],
+.pg-app #main-content > div:not(.ph-home) .grid > button > [class*="aspect-"],
+.pg-app #main-content > div:not(.ph-home) .grid > a > [class*="aspect-"] {
+  border-radius: 18px;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 0 15px 42px -32px rgba(8,46,93,.4);
+}
+.pg-app #main-content > div:not(.ph-home) img {
+  transition: transform .9s cubic-bezier(.16,1,.3,1), filter .6s ease;
+}
+@media(hover:hover) and (pointer:fine) {
+  .pg-app #main-content > div:not(.ph-home) .group:hover img,
+  .pg-app #main-content > div:not(.ph-home) .grid > button:hover img,
+  .pg-app #main-content > div:not(.ph-home) .grid > a:hover img {
+    transform: scale(1.055);
+    filter: saturate(1.08);
+  }
+}
+.pg-app #main-content > div:not(.ph-home) .grid > button {
+  text-align: left;
+}
+
+/* The filter rows become tactile capsule controls rather than flat boxes. */
+.pg-app #main-content > div:not(.ph-home) .flex.flex-wrap > button {
+  border-radius: 999px;
+  min-height: 46px;
+  padding-inline: 20px;
+  font-weight: 660;
+  transition: transform .3s cubic-bezier(.2,.8,.2,1),
+              background-color .25s ease, color .25s ease,
+              border-color .25s ease;
+}
+.pg-app #main-content > div:not(.ph-home) .flex.flex-wrap > button:hover { transform: translateY(-2px); }
+.pg-app #main-content > div:not(.ph-home) .flex.flex-wrap > button:active { transform: translateY(0); }
+
+/* Motion-library-inspired image wipes on photographs only. Source components
+   register animations on entrance, never leave an offscreen image invisible. */
+.pg-app #main-content > div:not(.ph-home) img[data-phx-wipe] {
+  clip-path: inset(0 0 0 0);
+  will-change: auto;
+}
+
+/* Trading story on home: preserve narrative and avoid overlapping pinned areas. */
+.ph-home .ph-film {
+  border-radius: 24px;
+  outline-offset: 4px;
+}
+.ph-home .ph-film-body { max-width: min(90%,620px); }
+.ph-home .ph-story-copy h2 { text-wrap: balance; }
+.ph-home .ph-story-copy p { max-width: 550px; }
+.ph-home .ph-product-track:focus-within .ph-perspective-card.is-active {
+  filter: saturate(1.10);
+}
+.ph-home .ph-philosophy-copy h2 { text-wrap: balance; }
+
+/* Contact page. Distinct enquiry panel, reassuring controls without claiming
+   transmission to a server. */
+.pg-app #main-content > div:not(.ph-home) form {
+  border-radius: 22px;
+}
+.pg-app #main-content > div:not(.ph-home) form :is(input,select,textarea) {
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #c9d8ea;
+  color: #0e3159;
+  line-height: 1.45;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+.pg-app #main-content > div:not(.ph-home) form :is(input,select,textarea):focus {
+  border-color: #2779cb;
+  box-shadow: 0 0 0 4px rgba(39, 121, 203, .13);
+}
+.pg-app #main-content > div:not(.ph-home) form label > span {
+  font-size: 15px;
+  font-weight: 680;
+}
+.pg-app #main-content > div:not(.ph-home) form button[type="submit"] {
+  border-radius: 999px;
+  min-height: 53px;
+}
+.pg-app #main-content > div:not(.ph-home) form button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 35px -18px rgba(8,48,97,.3);
+}
+.pg-app #main-content > div:not(.ph-home) .bg-surface {
+  background: #edf4fc;
+}
+.pg-app #main-content > div:not(.ph-home) .lg\:col-span-8.bg-surface {
+  border: 1px solid #dce8f7;
+  border-radius: 24px;
+  box-shadow: 0 28px 70px -49px rgba(9,52,103,.21);
+}
+
+/* Gallery lightbox is a genuine dialog; images must not inherit page reveals. */
+.pg-app [role="dialog"] img { clip-path: none !important; transition: none; }
+.pg-app [role="dialog"] button {
+  min-width: 44px; min-height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  transition: background-color .25s ease;
+}
+.pg-app [role="dialog"] button:hover { background: rgba(255,255,255,.2); }
+
+/* Footer clean-up to match the page's renewed visual rhythm. */
+.pg-footer-main h2 { text-wrap: balance; }
+.pg-footer-directory a { padding-block: 5px; }
+.pg-footer-end button { min-height: 45px; }
+.pg-footer-end button:hover { color: #fff; }
+
+/* Touch devices are intentionally simple: no hover-only controls or scroll
+   pinning, large targets, native scrolling and no visual overflow. */
+@media(max-width:990px) {
+  .pg-app #main-content > div:not(.ph-home) .grid > a,
+  .pg-app #main-content > div:not(.ph-home) .grid > button { border-radius: 16px; }
+  .ph-home .ph-film-body { max-width: 100%; }
+}
+@media(max-width:768px) {
+  .ph-home .ph-hero-edge { padding-inline: 20px; padding-block: 14px; background: linear-gradient(0deg,rgba(3,20,44,.3),transparent); }
+  .ph-home .ph-hero-edge a { font-size: 14px; }
+  .ph-home .ph-film { border-radius: 20px !important; }
+  .pg-app #main-content > div:not(.ph-home) { padding-bottom: 64px; }
+  .pg-app #main-content > div:not(.ph-home) h1 { text-wrap: pretty; }
+  .pg-app #main-content > div:not(.ph-home) .flex.flex-wrap > button { min-height: 44px; padding: 10px 16px; }
+  .pg-app #main-content > div:not(.ph-home) .lg\:col-span-8.bg-surface { border-radius: 18px; }
+  .pg-app #main-content > div:not(.ph-home) .text-sm { font-size: 15px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .pg-app #main-content > div:not(.ph-home) img,
+  .pg-app #main-content > div:not(.ph-home) .group,
+  .pg-app #main-content > div:not(.ph-home) .grid > a,
+  .pg-app #main-content > div:not(.ph-home) .grid > button,
+  .pg-app #main-content > div:not(.ph-home) .flex.flex-wrap > button,
+  .ph-home .ph-hero-edge a {
+    animation: none !important; transition: none !important;
+  }
+  .pg-app #main-content > div:not(.ph-home) img[data-phx-wipe] { clip-path: none !important; opacity: 1 !important; }
+}
