@@ -1,4 +1,4 @@
-/* PHONIX GLOBAL TRADERS — background-free responsive brand identity
+/* PHOENIX GLOBAL TRADERS — background-free responsive brand identity
    White-on-transparent over the dark hero, navy-on-transparent over light surfaces.
    Both artwork variants retain their original alpha channel and blue swoosh. */
 .pg-app a.pg-official-brand,
@@ -104,3 +104,20 @@
 @media(prefers-reduced-motion:reduce){
   .pg-app a.pg-official-brand { transition: none !important; }
 }
+
+/* Official PHOENIX mark leads the loading animation and remains visible at every size. */
+.ph-intro .ph-intro-main { display:flex; flex-direction:column; justify-content:center; align-items:flex-start; }
+.ph-intro .ph-intro-name--official { order:-1; margin:0 0 clamp(20px,3.6vw,44px); width:clamp(280px,36vw,530px); height:auto; opacity:1; }
+.ph-intro .ph-intro-name--official img { display:block; width:100%; height:auto; object-fit:contain; }
+.ph-intro .ph-intro-line > span { font-size:clamp(60px,9.5vw,148px); }
+@media(max-width:767px){
+  .ph-intro .ph-intro-main { padding-block:18px; }
+  .ph-intro .ph-intro-name--official { width:min(75vw,390px); margin-bottom:clamp(24px,6vh,45px); }
+  .ph-intro .ph-intro-line > span { font-size:clamp(43px,10.4vw,72px); }
+  .ph-intro .ph-intro-line--second { margin-top:8px; }
+}
+@media(max-width:390px){
+  .ph-intro .ph-intro-name--official { width:76vw; }
+  .ph-intro .ph-intro-line > span { font-size:clamp(40px,10vw,55px); }
+}
+@media(prefers-reduced-motion:reduce){ .ph-intro .ph-intro-name--official{opacity:1!important;transform:none!important} }

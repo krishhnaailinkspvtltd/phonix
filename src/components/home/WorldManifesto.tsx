@@ -10,11 +10,11 @@ const MESSAGE = 'A world of possibilities begins with a single connection.'
 const WORDS = MESSAGE.split(' ')
 
 /**
- * A Phonix-original editorial interlude using the supplied motion pack's
+ * A Phoenix-original editorial interlude using the supplied motion pack's
  * split-headline, image-wipe and parallax techniques. The section deliberately
  * does not pin: two adjacent pinned regions created overlapping GSAP pin-spacers
  * and a white gap before this section on desktop.
- * All imagery and copy belong to the Phonix project.
+ * All imagery and copy belong to the Phoenix project.
  */
 export function WorldManifesto() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -79,7 +79,7 @@ export function WorldManifesto() {
     <section className="phx-manifesto" ref={sectionRef} aria-labelledby="phx-manifesto-heading">
       <div className="phx-manifesto-grid" aria-hidden="true" />
       <div className="phx-manifesto-top">
-        <span><i aria-hidden="true" /> THE PHONIX PERSPECTIVE</span>
+        <span><i aria-hidden="true" /> THE PHOENIX PERSPECTIVE</span>
         <span>INDIA <ArrowUpRight size={14} aria-hidden="true" /> GLOBAL MARKETS</span>
       </div>
       <div className="phx-manifesto-content">
@@ -102,7 +102,7 @@ export function WorldManifesto() {
             <div className="phx-frame-image"><img data-phx-image src="/images/categories/cat-commodity.jpg" alt="Agricultural products available for export enquiries" loading="lazy" /></div>
             <figcaption><span>02 / ORIGINS</span><ArrowDownRight size={17} aria-hidden="true" /></figcaption>
           </figure>
-          <div className="phx-orbit-mark" aria-hidden="true"><span>PHONIX</span><span>GLOBAL TRADE</span></div>
+          <div className="phx-orbit-mark" aria-hidden="true"><span>PHOENIX</span><span>GLOBAL TRADERS</span></div>
         </div>
       </div>
       <div className="phx-manifesto-bottom"><span>ROOTED IN INDIA / BUILT FOR CONNECTION</span><span>EXPLORE MORE <ArrowDownRight size={16} aria-hidden="true" /></span></div>

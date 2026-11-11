@@ -7,7 +7,7 @@ import { PRODUCT_CATEGORIES, PRODUCTS_CATALOG } from '@/data/tradeData'
 export function ProductsPage() {
   const [params, setParams] = useSearchParams()
   const [category, setCategory] = useState(params.get('category') || 'all')
-  useEffect(() => { window.scrollTo(0,0); document.title = 'Indian Export Products & International Imports | PHONIX GLOBAL TRADE' }, [])
+  useEffect(() => { window.scrollTo(0,0); document.title = 'Indian Export Products & International Imports | PHOENIX GLOBAL TRADERS' }, [])
   useEffect(() => { setCategory(params.get('category') || 'all') }, [params])
   const filtered = category === 'all' ? PRODUCTS_CATALOG : PRODUCTS_CATALOG.filter(item=>item.categoryId===category)
   const select = (id:string) => { setCategory(id); setParams(id==='all'?{}:{category:id}) }

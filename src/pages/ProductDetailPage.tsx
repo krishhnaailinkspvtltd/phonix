@@ -7,7 +7,7 @@ export function ProductDetailPage() {
   const { id } = useParams<{id:string}>()
   const product = PRODUCTS_CATALOG.find(p=>p.id===id)
   const [imageIndex, setImageIndex] = useState(0)
-  useEffect(()=>{window.scrollTo(0,0);document.title=product?`${product.title} | PHONIX GLOBAL TRADE`:'Product | PHONIX GLOBAL TRADE';setImageIndex(0)},[id,product])
+  useEffect(()=>{window.scrollTo(0,0);document.title=product?`${product.title} | PHOENIX GLOBAL TRADERS`:'Product | PHOENIX GLOBAL TRADERS';setImageIndex(0)},[id,product])
   if(!product) return <div className="pt-36 pb-32 max-w-5xl mx-auto px-6"><h1 className="text-4xl font-display font-bold mb-6">Product not found</h1><Link className="text-accent" to="/products">← Browse all products</Link></div>
   const images = [product.image,...product.secondaryImages]
   const related = PRODUCTS_CATALOG.filter(p=>p.id!==product.id&&p.categoryId===product.categoryId).slice(0,3)

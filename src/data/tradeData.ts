@@ -1,5 +1,5 @@
 /**
- * PHONIX GLOBAL TRADE — editable demo catalog.
+ * PHOENIX GLOBAL TRADERS — editable demo catalog.
  * Product families and trade directions come from the client's brief.
  * Individual sample items, photography and product options illustrate potential inquiries,
  * not confirmed SKUs, inventories, certifications, origins, or delivery commitments.
@@ -53,7 +53,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
   item('fresh-produce','agri-products','Fresh Fruits & Produce','Seasonal agricultural products from India.','Explore enquiries for Indian fruits and vegetables. Availability, grade, packing and export eligibility vary by product and season.',PHOTO.mangoes,['Seasonal fruit','Vegetables','Market-specific packing']),
   item('food-ingredients','agri-products','Indian Food Ingredients','From agricultural sourcing to food processing needs.','Discuss requirements for selected Indian-origin agricultural and food ingredients, based on the buyer’s desired product form and destination.',PHOTO.produce,['Raw ingredients','Processed ingredients','Bulk sourcing']),
   item('indian-textiles','manufactured-goods','Indian Textiles & Fabrics','Manufactured in India, explored for markets abroad.','Showcase category for enquiries about India-made textiles and fabrics. Material, dimensions, colour, finishing and quantities are confirmed case by case.',PHOTO.textile,['Fabric rolls','Finished textile goods','Custom specifications']),
-  item('made-in-india','manufactured-goods','Made-in-India Products','Broader sourcing possibilities across Indian manufacturing.','For buyers looking for Indian manufactured products, PHONIX can discuss the product category and required supplier specifications. This is not a claim of stocked inventory.',PHOTO.manufacturing,['Manufactured goods','Packaging products','Buyer-defined products']),
+  item('made-in-india','manufactured-goods','Made-in-India Products','Broader sourcing possibilities across Indian manufacturing.','For buyers looking for Indian manufactured products, PHOENIX can discuss the product category and required supplier specifications. This is not a claim of stocked inventory.',PHOTO.manufacturing,['Manufactured goods','Packaging products','Buyer-defined products']),
   item('global-import-sourcing','imports','International Product Sourcing','Import enquiries for the Indian market.','Looking for products from overseas? Share your target category, origin preference, quality and volume requirements to discuss international sourcing options.',PHOTO.importedGoods,['Overseas supplier enquiry','Buyer-defined items','Import to India'],'Import to India'),
 ]
 
