@@ -205,13 +205,13 @@ export function BlueTradeExperience() {
 
   return <div ref={homeRef} className="ph-home">
     {/* 01 — full-bleed, photographic first impression */}
-    <section className="ph-hero" onPointerMove={onHeroPointer} aria-label="Introducing PHONIX Global Trade">
+    <section className="ph-hero" onPointerMove={onHeroPointer} aria-label="Introducing PHOENIX Global Trade">
       <div className="ph-hero-photo" role="img" aria-label="Cargo ship at an international shipping terminal"/>
       <div className="ph-hero-shade"/>
       <div className="ph-hero-content">
         <span className="ph-hero-kicker">INDIAN EXPORTS · GLOBAL IMPORTS</span>
         <h1><span className="ph-word-mask"><span>From India.</span></span><span className="ph-word-mask"><span><em>To the world.</em></span></span></h1>
-        <div className="ph-hero-detail"><p>Exporting Indian products worldwide and exploring imports from international suppliers — one opportunity at a time.</p><Link to="/about" className="ph-button ph-button--white">Discover PHONIX <ArrowUpRight size={20}/></Link></div>
+        <div className="ph-hero-detail"><p>Exporting Indian products worldwide and exploring imports from international suppliers — one opportunity at a time.</p><Link to="/about" className="ph-button ph-button--white">Discover PHOENIX <ArrowUpRight size={20}/></Link></div>
       </div>
       <div className="ph-hero-edge"><a href="#in-motion">SCROLL TO DISCOVER <ArrowDown size={18}/></a><span>01 / 06</span></div>
     </section>
@@ -293,7 +293,7 @@ export function BlueTradeExperience() {
         {SCENES.map((scene,index) => <article key={scene.number} className={`ph-story-scene ph-story-scene--${index+1}`} style={{ zIndex: index + 1 }}>
           <div className="ph-story-image" style={{ backgroundImage: `url(${scene.image}), url(/images/hero/hero-port.jpg)`, backgroundPosition: scene.position }}/>
           <div className="ph-story-shade"/>
-          <div className="ph-story-top"><span>PHONIX / INDIA & THE WORLD</span><span>{scene.number} / 04</span></div>
+          <div className="ph-story-top"><span>PHOENIX / INDIA & THE WORLD</span><span>{scene.number} / 04</span></div>
           <div className="ph-story-copy"><span className="ph-kicker">{scene.eyebrow}</span><h2>{scene.title}<br/><em>{scene.italic}</em></h2><p>{scene.description}</p></div>
           <div className="ph-story-foot"><span>SCROLL TO EXPLORE</span><span>{scene.number} — 04</span></div>
         </article>)}
