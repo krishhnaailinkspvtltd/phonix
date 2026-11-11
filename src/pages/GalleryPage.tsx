@@ -14,7 +14,7 @@ export function GalleryPage(){
   const index=visibleIndexes.indexOf(current)
   return visibleIndexes[(index+direction+visibleIndexes.length)%visibleIndexes.length]
  })
- useEffect(()=>{window.scrollTo(0,0);document.title='Products, Sourcing & Trade Gallery | PHONIX GLOBAL TRADE'},[])
+ useEffect(()=>{window.scrollTo(0,0);document.title='Products, Sourcing & Trade Gallery | PHOENIX GLOBAL TRADERS'},[])
  useEffect(()=>{const handler=(e:KeyboardEvent)=>{if(selected===null)return;if(e.key==='Escape')setSelected(null);if(e.key==='ArrowRight')moveImage(1);if(e.key==='ArrowLeft')moveImage(-1)};document.addEventListener('keydown',handler);return()=>document.removeEventListener('keydown',handler)},[selected,filter])
  useEffect(()=>{if(selected===null)return;const overflow=document.body.style.overflow;document.body.style.overflow='hidden';return()=>{document.body.style.overflow=overflow}},[selected])
  const current=selected===null?null:GALLERY_ITEMS[selected]
