@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, ArrowUpRight } from 'lucide-react'
 import { FullscreenMenu } from '@/components/layout/FullscreenMenu'
-import { PHONIX_LOGO_WHITE, PHONIX_LOGO_NAVY } from '@/lib/brandAssets'
+import { PHOENIX_LOGO_WHITE, PHOENIX_LOGO_NAVY } from '@/lib/brandAssets'
 
 export const NAV_LINKS = [
   { label: 'Home', path: '/' }, { label: 'Our story', path: '/about' },
@@ -40,7 +40,7 @@ export function Navigation() {
   return <>
     <header className={`pg-header ${overHero ? 'pg-header--over-hero' : 'pg-header--solid'} ${scrolled ? 'pg-header--scrolled' : ''} ${hidden ? 'phx-header--hidden' : ''}`}>
       <nav className="pg-nav" aria-label="Primary navigation">
-        <Link to="/" className="pg-wordmark pg-official-brand" aria-label="PHONIX GLOBAL TRADERS home"><img src={overHero ? PHONIX_LOGO_WHITE : PHONIX_LOGO_NAVY} alt="PHONIX GLOBAL TRADERS" width="900" height="300" decoding="async" fetchPriority="high" /></Link>
+        <Link to="/" className="pg-wordmark pg-official-brand" aria-label="PHOENIX GLOBAL TRADERS home"><img src={overHero ? PHOENIX_LOGO_WHITE : PHOENIX_LOGO_NAVY} alt="PHOENIX GLOBAL TRADERS" width="900" height="300" decoding="async" fetchPriority="high" /></Link>
         <div className="pg-nav-links">{NAV_LINKS.map(link => <NavLink key={link.path} to={link.path} end={link.path === '/'} className={({ isActive }) => isActive ? 'active' : ''}>{link.label}</NavLink>)}</div>
         <div className="pg-nav-actions">
           <Link to="/contact" className="pg-nav-contact">Get in touch <ArrowUpRight size={16} /></Link>
