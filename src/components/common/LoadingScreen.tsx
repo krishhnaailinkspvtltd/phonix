@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { PHONIX_LOGO_NAVY } from '@/lib/brandAssets'
+import { PHOENIX_LOGO_NAVY } from '@/lib/brandAssets'
 
 type Props = { onComplete: () => void }
 
@@ -28,18 +28,18 @@ export function LoadingScreen({ onComplete }: Props) {
 
   return (
     <AnimatePresence onExitComplete={finish}>
-      {!leaving && <motion.div className="ph-intro" key="ph-intro" role="status" aria-label="PHONIX GLOBAL TRADE opening introduction"
+      {!leaving && <motion.div className="ph-intro" key="ph-intro" role="status" aria-label="PHOENIX GLOBAL TRADERS opening introduction"
         initial={{ opacity: 1 }} exit={{ y: '-100%' }}
         transition={{ duration: .95, ease: [.76, 0, .24, 1] }}>
         <div className="ph-intro-photo" aria-hidden="true" />
         <motion.div className="ph-intro-veil" initial={{ scaleX: 1 }} animate={{ scaleX: 0 }} transition={{ delay: .55, duration: 1.15, ease: [.65, 0, .15, 1] }}/>
-        <div className="ph-intro-header"><span>PHONIX / INTERNATIONAL TRADE</span><button type="button" onClick={() => setLeaving(true)}>Skip introduction <span aria-hidden="true">↗</span></button></div>
+        <div className="ph-intro-header"><span>PHOENIX / INTERNATIONAL TRADE</span><button type="button" onClick={() => setLeaving(true)}>Skip introduction <span aria-hidden="true">↗</span></button></div>
         <div className="ph-intro-main">
+          <motion.div className="ph-intro-name ph-intro-name--official" initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .2, duration: .85 }}><img src={PHOENIX_LOGO_NAVY} alt="PHOENIX GLOBAL TRADERS" width="900" height="300" /></motion.div>
           <div className="ph-intro-line"><motion.span initial={{ y: '112%' }} animate={{ y: 0 }} transition={{ duration: 1.05, ease: [.2,.8,.15,1], delay: .12 }}>From India,</motion.span></div>
           <div className="ph-intro-line ph-intro-line--second"><motion.span initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ duration: 1.05, ease: [.2,.8,.15,1], delay: .29 }}><em>to the world.</em></motion.span></div>
-          <motion.div className="ph-intro-name ph-intro-name--official" initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .9, duration: .7 }}><img src={PHONIX_LOGO_NAVY} alt="PHONIX GLOBAL TRADERS" width="900" height="300" /></motion.div>
         </div>
-        <div className="ph-intro-bottom"><span>INDIAN ROOTS · GLOBAL REACH</span><span>DISCOVER PHONIX ↗</span></div>
+        <div className="ph-intro-bottom"><span>INDIAN ROOTS · GLOBAL REACH</span><span>DISCOVER PHOENIX ↗</span></div>
         <motion.div className="ph-intro-progress" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: .2, duration: 2, ease: 'easeInOut' }} aria-hidden="true"/>
       </motion.div>}
     </AnimatePresence>
