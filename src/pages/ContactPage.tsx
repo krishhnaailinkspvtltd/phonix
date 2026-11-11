@@ -13,12 +13,12 @@ export function ContactPage(){
  const [submitted,setSubmitted]=useState(false)
  const [copied,setCopied]=useState(false)
  const [copyError,setCopyError]=useState('')
- useEffect(()=>{window.scrollTo(0,0);document.title='Import & Export Product Enquiries | PHONIX GLOBAL TRADE'},[])
+ useEffect(()=>{window.scrollTo(0,0);document.title='Import & Export Product Enquiries | PHOENIX GLOBAL TRADERS'},[])
  useEffect(()=>{const subject=params.get('subject');if(subject)setForm(f=>({...f,subject}))},[params])
  const change=(e:ChangeEvent<HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement>)=>{setForm(s=>({...s,[e.target.name]:e.target.value}));setError('')}
  const submit=(e:FormEvent)=>{e.preventDefault();if(!form.fullName.trim()||!form.email.trim()||!form.message.trim()){setError('Please provide your name, email and product requirements.');return}if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)){setError('Please enter a valid email address.');return}setSubmitted(true)}
  const enquiryText=[
-  'PHONIX GLOBAL TRADE — Product Enquiry',
+  'PHOENIX GLOBAL TRADERS — Product Enquiry',
   'Name: '+form.fullName,
   'Email: '+form.email,
   'Company: '+(form.company||'Not provided'),
