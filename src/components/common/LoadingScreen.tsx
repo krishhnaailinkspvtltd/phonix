@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
+import { PHONIX_LOGO_NAVY } from '@/lib/brandAssets'
 
 type Props = { onComplete: () => void }
 
@@ -36,7 +37,7 @@ export function LoadingScreen({ onComplete }: Props) {
         <div className="ph-intro-main">
           <div className="ph-intro-line"><motion.span initial={{ y: '112%' }} animate={{ y: 0 }} transition={{ duration: 1.05, ease: [.2,.8,.15,1], delay: .12 }}>From India,</motion.span></div>
           <div className="ph-intro-line ph-intro-line--second"><motion.span initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ duration: 1.05, ease: [.2,.8,.15,1], delay: .29 }}><em>to the world.</em></motion.span></div>
-          <motion.div className="ph-intro-name ph-intro-name--official" initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .9, duration: .7 }}><img src="/images/branding/phonix-official-logo.jpg" alt="PHONIX GLOBAL TRADERS" width="640" height="213" /></motion.div>
+          <motion.div className="ph-intro-name ph-intro-name--official" initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .9, duration: .7 }}><img src={PHONIX_LOGO_NAVY} alt="PHONIX GLOBAL TRADERS" width="900" height="300" /></motion.div>
         </div>
         <div className="ph-intro-bottom"><span>INDIAN ROOTS · GLOBAL REACH</span><span>DISCOVER PHONIX ↗</span></div>
         <motion.div className="ph-intro-progress" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: .2, duration: 2, ease: 'easeInOut' }} aria-hidden="true"/>

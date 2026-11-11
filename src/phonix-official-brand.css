@@ -1,58 +1,106 @@
-/* Official Phonix Global Traders identity — supplied original logo.
-   Cropped in its display viewport only; source artwork is preserved. */
+/* PHONIX GLOBAL TRADERS — background-free responsive brand identity
+   White-on-transparent over the dark hero, navy-on-transparent over light surfaces.
+   Both artwork variants retain their original alpha channel and blue swoosh. */
 .pg-app a.pg-official-brand,
 .pg-fullmenu a.pg-official-brand {
-  display: block;
-  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  overflow: hidden;
-  width: clamp(220px, 18.3vw, 285px);
-  height: clamp(55px, 4.6vw, 64px);
-  border-radius: 5px;
-  background: #021832;
-  line-height: 0;
-  isolation: isolate;
-  box-shadow: 0 7px 23px rgba(0,18,43,.12);
-  transition: box-shadow .32s ease, transform .35s cubic-bezier(.2,.8,.2,1);
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  width: clamp(205px, 18.5vw, 275px);
+  height: auto;
+  aspect-ratio: 3 / 1;
+  max-height: 93px;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  isolation: auto;
+  transition: opacity .3s ease, transform .3s ease;
 }
 .pg-app a.pg-official-brand img,
 .pg-fullmenu a.pg-official-brand img {
   display: block;
+  position: relative;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center 50%;
-  max-width: none;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  filter: none !important;
+  transform: none !important;
+  box-shadow: none !important;
+  transition: opacity .3s ease !important;
+}
+.pg-app .pg-header a.pg-official-brand:hover {
+  box-shadow: none !important;
+  transform: translateY(-1px);
+  opacity: .9;
+}
+.pg-app .pg-header--over-hero a.pg-official-brand {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.pg-app .pg-fullmenu a.pg-official-brand--menu,
+.pg-fullmenu a.pg-official-brand--menu {
+  width: clamp(220px, 23vw, 320px);
+  height: auto;
+  max-height: 108px;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.pg-app .pg-footer-end a.pg-official-brand--footer {
+  width: clamp(190px, 18vw, 245px);
+  height: auto;
+  max-height: 84px;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.ph-intro .ph-intro-name--official {
+  display: flex;
+  align-items: center;
+  width: clamp(275px, 38vw, 540px);
+  height: auto;
+  aspect-ratio: 3 / 1;
+  max-height: 180px;
+  overflow: visible;
+  padding: 0;
   border: 0;
   border-radius: 0;
-  transform: none !important;
-  filter: none !important;
-  transition: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
-.pg-header a.pg-official-brand:hover { transform: translateY(-1px); box-shadow: 0 12px 27px rgba(0,18,43,.20); }
-.pg-header--over-hero a.pg-official-brand { box-shadow: 0 7px 26px rgba(0,0,0,.23); }
-.pg-fullmenu a.pg-official-brand--menu { width: 290px; height: 65px; box-shadow: 0 8px 35px rgba(0,0,0,.18); }
-.pg-footer-end a.pg-official-brand--footer { width: 215px; height: 49px; box-shadow: none; }
-.ph-intro .ph-intro-name--official {
+.ph-intro .ph-intro-name--official img {
   display: block;
-  width: clamp(255px, 38vw, 540px);
-  height: clamp(72px, 8.4vw, 118px);
-  overflow: hidden;
-  border-radius: 6px;
-  background: #021832;
-  box-shadow: 0 16px 45px rgba(5,32,70,.16);
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: transparent;
+  border: 0;
+  filter: none !important;
 }
-.ph-intro .ph-intro-name--official img { display:block; width:100%; height:100%; object-fit:cover; object-position:center; }
 @media(max-width:990px){
-  .pg-app .pg-header a.pg-official-brand { width: clamp(200px, 33vw, 255px); height: 57px; }
+  .pg-app .pg-header a.pg-official-brand { width: clamp(202px, 28vw, 252px); max-height: 85px; }
 }
 @media(max-width:767px){
-  .pg-app .pg-header a.pg-official-brand { width: clamp(180px, 50vw, 235px); height: clamp(46px, 12.5vw, 53px); }
-  .pg-fullmenu a.pg-official-brand--menu { width: min(235px, 66vw); height: 54px; }
-  .pg-footer-end a.pg-official-brand--footer { width: 215px; height: 49px; }
-  .ph-intro .ph-intro-name--official { width: clamp(240px, 68vw, 400px); height: clamp(58px, 18vw, 90px); }
+  .pg-app .pg-header a.pg-official-brand { width: clamp(177px, 49vw, 216px); max-height: 73px; }
+  .pg-app .pg-fullmenu a.pg-official-brand--menu,
+  .pg-fullmenu a.pg-official-brand--menu { width: clamp(195px, 60vw, 250px); }
+  .pg-app .pg-footer-end a.pg-official-brand--footer { width: 210px; }
+  .ph-intro .ph-intro-name--official { width: clamp(235px, 64vw, 390px); }
 }
 @media(max-width:360px){
-  .pg-app .pg-header a.pg-official-brand { width: 174px; height: 45px; }
+  .pg-app .pg-header a.pg-official-brand { width: 172px; }
 }
-@media(prefers-reduced-motion:reduce){.pg-app a.pg-official-brand{transition:none!important}}
+@media(prefers-reduced-motion:reduce){
+  .pg-app a.pg-official-brand { transition: none !important; }
+}
