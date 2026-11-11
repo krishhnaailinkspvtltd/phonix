@@ -20,6 +20,7 @@ import './mobile-experience.css'
 import './motion-fixes.css'
 import './phonix-motion-atelier.css'
 import './phonix-final-polish.css'
+import './phonix-official-brand.css'
 
 function ScrollOnRouteChange() {
   const { pathname } = useLocation()

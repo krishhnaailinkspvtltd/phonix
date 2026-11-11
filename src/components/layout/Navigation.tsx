@@ -39,7 +39,7 @@ export function Navigation() {
   return <>
     <header className={`pg-header ${overHero ? 'pg-header--over-hero' : 'pg-header--solid'} ${scrolled ? 'pg-header--scrolled' : ''} ${hidden ? 'phx-header--hidden' : ''}`}>
       <nav className="pg-nav" aria-label="Primary navigation">
-        <Link to="/" className="pg-wordmark" aria-label="PHONIX GLOBAL TRADE home"><span className="pg-wordmark-main">PHONIX<span className="pg-period">.</span></span><span className="pg-wordmark-sub">GLOBAL TRADE</span></Link>
+        <Link to="/" className="pg-wordmark pg-official-brand" aria-label="PHONIX GLOBAL TRADERS home"><img src="/images/branding/phonix-official-logo.jpg" alt="PHONIX GLOBAL TRADERS" width="300" height="100" decoding="async" fetchPriority="high" /></Link>
         <div className="pg-nav-links">{NAV_LINKS.map(link => <NavLink key={link.path} to={link.path} end={link.path === '/'} className={({ isActive }) => isActive ? 'active' : ''}>{link.label}</NavLink>)}</div>
         <div className="pg-nav-actions">
           <Link to="/contact" className="pg-nav-contact">Get in touch <ArrowUpRight size={16} /></Link>

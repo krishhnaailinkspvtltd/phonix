@@ -1,0 +1,58 @@
+/* Official Phonix Global Traders identity — supplied original logo.
+   Cropped in its display viewport only; source artwork is preserved. */
+.pg-app a.pg-official-brand,
+.pg-fullmenu a.pg-official-brand {
+  display: block;
+  flex: 0 0 auto;
+  position: relative;
+  overflow: hidden;
+  width: clamp(220px, 18.3vw, 285px);
+  height: clamp(55px, 4.6vw, 64px);
+  border-radius: 5px;
+  background: #021832;
+  line-height: 0;
+  isolation: isolate;
+  box-shadow: 0 7px 23px rgba(0,18,43,.12);
+  transition: box-shadow .32s ease, transform .35s cubic-bezier(.2,.8,.2,1);
+}
+.pg-app a.pg-official-brand img,
+.pg-fullmenu a.pg-official-brand img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 50%;
+  max-width: none;
+  border: 0;
+  border-radius: 0;
+  transform: none !important;
+  filter: none !important;
+  transition: none !important;
+}
+.pg-header a.pg-official-brand:hover { transform: translateY(-1px); box-shadow: 0 12px 27px rgba(0,18,43,.20); }
+.pg-header--over-hero a.pg-official-brand { box-shadow: 0 7px 26px rgba(0,0,0,.23); }
+.pg-fullmenu a.pg-official-brand--menu { width: 290px; height: 65px; box-shadow: 0 8px 35px rgba(0,0,0,.18); }
+.pg-footer-end a.pg-official-brand--footer { width: 215px; height: 49px; box-shadow: none; }
+.ph-intro .ph-intro-name--official {
+  display: block;
+  width: clamp(255px, 38vw, 540px);
+  height: clamp(72px, 8.4vw, 118px);
+  overflow: hidden;
+  border-radius: 6px;
+  background: #021832;
+  box-shadow: 0 16px 45px rgba(5,32,70,.16);
+}
+.ph-intro .ph-intro-name--official img { display:block; width:100%; height:100%; object-fit:cover; object-position:center; }
+@media(max-width:990px){
+  .pg-app .pg-header a.pg-official-brand { width: clamp(200px, 33vw, 255px); height: 57px; }
+}
+@media(max-width:767px){
+  .pg-app .pg-header a.pg-official-brand { width: clamp(180px, 50vw, 235px); height: clamp(46px, 12.5vw, 53px); }
+  .pg-fullmenu a.pg-official-brand--menu { width: min(235px, 66vw); height: 54px; }
+  .pg-footer-end a.pg-official-brand--footer { width: 215px; height: 49px; }
+  .ph-intro .ph-intro-name--official { width: clamp(240px, 68vw, 400px); height: clamp(58px, 18vw, 90px); }
+}
+@media(max-width:360px){
+  .pg-app .pg-header a.pg-official-brand { width: 174px; height: 45px; }
+}
+@media(prefers-reduced-motion:reduce){.pg-app a.pg-official-brand{transition:none!important}}
